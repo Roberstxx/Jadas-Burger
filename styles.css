@@ -505,21 +505,24 @@ footer {
 }
 
 @media (max-width: 480px) {
-  .banner-container {
-    height: 200px; /* Altura para móviles */
-  }
 
-  .banner-title {
-    font-size: 2rem;
+  .contact-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    top: auto;
+    left: auto;
+    width: auto;
   }
-
-  .banner-slogan {
-    font-size: 1rem;
-  }
-
-  .whatsapp-btn {
-    padding: 10px 20px;
+  
+  .whatsapp-float {
+    padding: 10px 15px;
     font-size: 0.9rem;
+  }
+  
+  .whatsapp-float img {
+    width: 20px;
+    height: 20px;
   }
 }
 
