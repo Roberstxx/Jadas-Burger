@@ -414,85 +414,39 @@ footer {
 }
 
 
-/* === RESPONSIVE === */
+/* === RESPONSIVE GENERAL === */
 @media (max-width: 768px) {
-  .header-text h1 {
-    font-size: 2rem;
-  }
-  
-  .slogan {
-    font-size: 1.2rem;
-  }
-  
-  .logo-banner {
-    max-height: 200px;
-  }
-  
+  .header-text h1,
   h1 {
     font-size: 1.8rem;
   }
-  
-  .menu-items, .menu-grid {
+
+  .slogan,
+  .banner-slogan {
+    font-size: 1.2rem;
+  }
+
+  .logo-banner {
+    max-height: 200px;
+  }
+
+  .menu-items,
+  .menu-grid,
+  .footer-content {
     grid-template-columns: 1fr;
   }
-  
+
   .contact-buttons {
     flex-direction: column;
     align-items: center;
   }
-}
 
-@media (max-width: 480px) {
-  .header-text h1 {
-    font-size: 1.5rem;
-  }
-  
-  .slogan {
-    font-size: 1rem;
-  }
-  
-  .contact-float {
-    position: relative;
-    bottom: auto;
-    right: auto;
-    margin-top: 1rem;
-    text-align: center;
-  }
-  
-  .header-content {
-    flex-direction: column;
-    text-align: center;
-    padding-top: 1rem;
-  }
-  
-  h1 {
-    font-size: 1.5rem;
-  }
-  
-  .section-header h2 {
-    font-size: 1.5rem;
-  }
-  
-  .item {
-    padding: 1rem;
-  }
-  
-  .footer-content {
-    grid-template-columns: 1fr;
-  }
-}
-/* Versión Responsive */
-@media (max-width: 768px) {
   .banner-container {
     height: 300px; /* Altura menor para tablets */
   }
 
   .banner-title {
     font-size: 2.5rem;
-  }
-
-  .banner-slogan {
-    font-size: 1.3rem;
   }
 
   .banner-button {
@@ -505,21 +459,45 @@ footer {
 }
 
 @media (max-width: 480px) {
-  .banner-container {
-    height: 200px; /* Altura para móviles */
+  .header-text h1,
+  h1 {
+    font-size: 1.5rem;
   }
 
-  .banner-title {
-    font-size: 2rem;
-  }
-
+  .slogan,
   .banner-slogan {
     font-size: 1rem;
+  }
+
+  .banner-container {
+    height: 200px; /* Altura para móviles */
   }
 
   .whatsapp-btn {
     padding: 10px 20px;
     font-size: 0.9rem;
+  }
+
+  .contact-float {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 1rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .item {
+    padding: 1rem;
   }
 }
 
