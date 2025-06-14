@@ -24,47 +24,59 @@ body {
   scroll-behavior: smooth;
 }
 
-/* === ENCABEZADO === */
+/* === ENCABEZADO MEJORADO === */
 header {
-  background: linear-gradient(to right, var(--darker), var(--dark));
-  text-align: center;
-  padding: 1.5rem;
   position: relative;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background-color: var(--darker);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .header-content {
-  max-width: 1200px;
+  position: relative;
+  max-width: 600px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 2rem 1rem;
 }
 
-.logo {
-  width: 80px;
-  height: 80px;
+.logo-banner {
+  width: 50%;
+  max-height: 300px;
   object-fit: contain;
-  margin-bottom: 0.5rem;
-  transition: transform 0.3s ease;
+  display: block;
+  margin: 0 auto;
 }
 
-.logo:hover {
-  transform: scale(1.05);
+.header-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  z-index: 2;
 }
 
-h1 {
-  font-size: 2.2rem;
-  letter-spacing: 1px;
+.header-text h1 {
   color: var(--primary);
-  margin-bottom: 0.2rem;
+  font-size: 3rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
   font-weight: 700;
 }
 
 .slogan {
-  font-size: 1rem;
   color: var(--accent);
+  font-size: 1.5rem;
   font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .contact-float {
@@ -126,12 +138,30 @@ h1 {
   transform: translateY(20px);
   animation: fadeInUp 0.5s ease forwards;
   animation-delay: calc(var(--order) * 0.1s);
+  position: relative;
+  overflow: hidden;
+}
+
+.item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
 }
 
 .item:hover {
   transform: translateY(-5px) !important;
   box-shadow: 0 10px 25px rgba(255, 140, 0, 0.2);
   border-color: var(--primary);
+}
+
+.item:hover::before {
+  transform: scaleX(1);
 }
 
 .item h3 {
@@ -160,8 +190,12 @@ h1 {
 }
 
 .price {
-  color: var(--primary);
-  font-weight: 600;
+  background-color: var(--primary);
+  color: var(--darker);
+  padding: 0.2rem 0.5rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
 }
 
 .salsas li {
@@ -266,11 +300,34 @@ footer {
   color: var(--primary);
   margin-bottom: 1rem;
   font-size: 1.2rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footer-section h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--primary);
 }
 
 .footer-section p {
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
+}
+
+.footer-logo {
+  width: 60px;
+  margin-bottom: 1rem;
+}
+
+.icon {
+  width: 16px;
+  vertical-align: middle;
+  margin-right: 0.5rem;
 }
 
 .redes {
@@ -338,6 +395,18 @@ footer {
 
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
+  .header-text h1 {
+    font-size: 2rem;
+  }
+  
+  .slogan {
+    font-size: 1.2rem;
+  }
+  
+  .logo-banner {
+    max-height: 200px;
+  }
+  
   h1 {
     font-size: 1.8rem;
   }
@@ -350,18 +419,31 @@ footer {
     flex-direction: column;
     align-items: center;
   }
-  
-  .contact-float {
-    position: static;
-    margin-top: 1rem;
-  }
-  
-  .header-content {
-    padding-top: 1rem;
-  }
 }
 
 @media (max-width: 480px) {
+  .header-text h1 {
+    font-size: 1.5rem;
+  }
+  
+  .slogan {
+    font-size: 1rem;
+  }
+  
+  .contact-float {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 1rem;
+  }
+  
   h1 {
     font-size: 1.5rem;
   }
@@ -379,119 +461,64 @@ footer {
   }
 }
 
+/* ===== ESTILOS PERSONALIZABLES DEL BANNER ===== */
 
 
 
-
-
-/* === MEJORAS EN EL HEADER === */
-.header-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  padding: 1.5rem;
-}
-
-.logo-container {
-  width: 80px;
-  height: 80px;
-  margin-right: 1rem;
-  animation: pulse 2s infinite;
-}
-
-h1 span {
-  color: var(--accent);
-}
-
-.slogan {
-  font-size: 1.1rem;
-  color: var(--accent);
-  font-weight: 600;
-  margin-top: 0.5rem;
-}
-
-/* === MEJORAS EN LOS ÍTEMS DEL MENÚ === */
-.item {
+/* Contenedor del Banner */
+.banner-container {
   position: relative;
-  overflow: hidden;
-  transition: all 0.4s ease;
-}
-
-.item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 5px;
-  background: var(--primary);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
+  height: auto; /* Deja que la altura se ajuste al contenido */
+  overflow: hidden;
 }
 
-.item:hover::before {
-  transform: scaleX(1);
+/* Imagen del Banner */
+.banner-img {
+  width: 100%;
+  height: auto; /* Se ajusta a la imagen completa sin recortarla */
+  object-fit: contain; /* Mostrar toda la imagen */
+  display: block;
 }
 
-.price {
-  background-color: var(--primary);
-  color: var(--darker);
-  padding: 0.2rem 0.5rem;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 700;
+/* Versión Responsive */
+@media (max-width: 768px) {
+  .banner-container {
+    height: 300px; /* Altura menor para tablets */
+  }
+
+  .banner-title {
+    font-size: 2.5rem;
+  }
+
+  .banner-slogan {
+    font-size: 1.3rem;
+  }
+
+  .banner-button {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin-top: 20px;
+    display: inline-block;
+  }
 }
 
-/* === MEJORAS EN EL FOOTER === */
-.footer-logo {
-  width: 60px;
-  margin-bottom: 1rem;
-}
-
-.footer-section h3 {
-  position: relative;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.footer-section h3::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 40px;
-  height: 3px;
-  background: var(--primary);
-}
-
-.icon {
-  width: 16px;
-  vertical-align: middle;
-  margin-right: 0.5rem;
-}
-
-/* === EFECTOS ADICIONALES === */
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-/* === RESPONSIVE ADICIONAL === */
 @media (max-width: 480px) {
-  .header-content {
-    flex-direction: column;
-    text-align: center;
+  .banner-container {
+    height: 200px; /* Altura para móviles */
   }
-  
-  .logo-container {
-    margin-right: 0;
-    margin-bottom: 1rem;
+
+  .banner-title {
+    font-size: 2rem;
   }
-  
-  .contact-float {
-    position: static;
-    margin-top: 1rem;
+
+  .banner-slogan {
+    font-size: 1rem;
+  }
+
+  .whatsapp-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
   }
 }
