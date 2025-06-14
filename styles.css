@@ -560,3 +560,7 @@ footer {
     font-size: 0.9rem;
   }
 }
+@media (min-width: 481px) {
+      .contact-float {
+        transform: none !important;
+      }
