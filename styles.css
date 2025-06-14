@@ -481,5 +481,26 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+/* Versión Responsive */
+@media (max-width: 768px) {
+  .banner-container {
+    height: 300px; /* Altura menor para tablets */
+  }
 
+  .banner-title {
+    font-size: 2.5rem;
+  }
+
+  .banner-slogan {
+    font-size: 1.3rem;
+  }
+
+  .banner-button {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin-top: 20px;
+    display: inline-block;
+  }
+}
 
