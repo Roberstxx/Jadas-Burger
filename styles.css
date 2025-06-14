@@ -79,11 +79,30 @@ header {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
+/* Estilo base del botón */
 .contact-float {
   position: fixed;
   top: 20px;
   right: 20px;
-  z-index: 1000;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  background-color: #25d366;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 50px;
+  font-size: 1rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+/* Oculta el texto al inicio */
+.contact-float.minimized {
+  width: 45px;
+  padding: 10px;
+  justify-content: center;
 }
 
 /* === SECCIONES DE MENÚ === */
