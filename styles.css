@@ -433,71 +433,84 @@ footer {
 }
 
 /* === RESPONSIVE === */
-.contact-float {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 999;
-  background-color: #25D366; /* WhatsApp verde o el color que uses */
-  padding: 10px 15px;
-  border-radius: 50px;
-  color: white;
-  text-decoration: none;
-  animation: pulse 2s infinite;
-  transition: transform 0.3s ease;
-}
-
-.contact-float:hover {
-  transform: scale(1.05);
-}
-
-/* Animación opcional */
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-  }
-}
-
-
-/* === RESPONSIVE GENERAL === */
 @media (max-width: 768px) {
-  .header-text h1,
-  h1 {
-    font-size: 1.8rem;
+  .header-text h1 {
+    font-size: 2rem;
   }
-
-  .slogan,
-  .banner-slogan {
+  
+  .slogan {
     font-size: 1.2rem;
   }
-
+  
   .logo-banner {
     max-height: 200px;
   }
-
-  .menu-items,
-  .menu-grid,
-  .footer-content {
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  .menu-items, .menu-grid {
     grid-template-columns: 1fr;
   }
-
+  
   .contact-buttons {
     flex-direction: column;
     align-items: center;
   }
+}
 
+@media (max-width: 480px) {
+  .header-text h1 {
+    font-size: 1.5rem;
+  }
+  
+  .slogan {
+    font-size: 1rem;
+  }
+  
+  .contact-float {
+    position: fixed;
+    bottom: auto;
+    right: auto;
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 1rem;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .item {
+    padding: 1rem;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+}
+/* Versión Responsive */
+@media (max-width: 768px) {
   .banner-container {
     height: 300px; /* Altura menor para tablets */
   }
 
   .banner-title {
     font-size: 2.5rem;
+  }
+
+  .banner-slogan {
+    font-size: 1.3rem;
   }
 
   .banner-button {
@@ -510,48 +523,20 @@ footer {
 }
 
 @media (max-width: 480px) {
-  .header-text h1,
-  h1 {
-    font-size: 1.5rem;
-  }
-
-  .slogan,
-  .banner-slogan {
-    font-size: 1rem;
-  }
-
   .banner-container {
     height: 200px; /* Altura para móviles */
+  }
+
+  .banner-title {
+    font-size: 2rem;
+  }
+
+  .banner-slogan {
+    font-size: 1rem;
   }
 
   .whatsapp-btn {
     padding: 10px 20px;
     font-size: 0.9rem;
   }
-
-
-
-  .header-content {
-    flex-direction: column;
-    text-align: center;
-    padding-top: 1rem;
-  }
-
-  .section-header h2 {
-    font-size: 1.5rem;
-  }
-
-  .item {
-    padding: 1rem;
-  }
-  @media (max-width: 480px) {
-  .contact-float {
-    transform: scale(0.85);
-  }
 }
-
-}
-
-
-
-
