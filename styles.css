@@ -481,48 +481,36 @@ footer {
   display: block;
 }
 
-/* Versión Responsive */
+/* Responsive para móviles */
 @media (max-width: 768px) {
-  .banner-container {
-    height: 300px; /* Altura menor para tablets */
+  .header-text h1 {
+    font-size: 2rem;
   }
-
-  .banner-title {
-    font-size: 2.5rem;
+  
+  .slogan {
+    font-size: 1.2rem;
   }
-
-  .banner-slogan {
-    font-size: 1.3rem;
-  }
-
-  .banner-button {
-    position: relative;
-    bottom: auto;
-    right: auto;
-    margin-top: 20px;
-    display: inline-block;
+  
+  .logo {
+    max-height: 200px;
   }
 }
 
 @media (max-width: 480px) {
-
+  .header-text h1 {
+    font-size: 1.5rem;
+  }
+  
+  .slogan {
+    font-size: 1rem;
+  }
+  
   .contact-float {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    top: auto;
-    left: auto;
-    width: auto;
-  }
-  
-  .whatsapp-float {
-    padding: 10px 15px;
-    font-size: 0.9rem;
-  }
-  
-  .whatsapp-float img {
-    width: 20px;
-    height: 20px;
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin-top: 1rem;
+    text-align: center;
   }
 }
 
