@@ -81,12 +81,10 @@ header {
 
 .contact-float {
   position: fixed;
-  bottom: 20px;
+  top: 20px;
   right: 20px;
-  text-align: center;
-  z-index: 999;
+  z-index: 1000;
 }
-
 
 /* === SECCIONES DE MENÚ === */
 .menu {
@@ -395,181 +393,87 @@ footer {
   100% { transform: scale(1); }
 }
 
-
-/* ===== ESTILOS PERSONALIZABLES DEL BANNER ===== */
-
-
-
-/* Contenedor del Banner */
-.banner-container {
-  position: relative;
-  width: 100%;
-  height: auto; /* Deja que la altura se ajuste al contenido */
-  overflow: hidden;
-}
-
-/* Imagen del Banner */
-.banner-img {
-  width: 100%;
-  height: auto; /* Se ajusta a la imagen completa sin recortarla */
-  object-fit: contain; /* Mostrar toda la imagen */
-  display: block;
-}
-
-/* === RESPONSIVE === */
+/* === RESPONSIVE GENERAL === */
 @media (max-width: 768px) {
-  .header-text h1 {
-    font-size: 2rem;
-  }
-
-  .slogan {
-    font-size: 1.2rem;
-  }
-
-  .logo-banner {
-    max-height: 200px;
-  }
-
-  h1 {
-    font-size: 1.8rem;
-  }
-
-  .menu-items, .menu-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .contact-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .banner-container {
-    height: auto; /* Cambiado para que se ajuste al contenido */
-  }
-
-  .banner-title {
-    font-size: 2.5rem;
-  }
-
-  .banner-slogan {
-    font-size: 1.3rem;
-  }
-
-  .banner-button {
+  .header-text h1 { font-size: 2rem; }
+  .slogan        { font-size: 1.2rem; }
+  .logo-banner   { max-height: 200px; }
+  h1             { font-size: 1.8rem; }
+  .menu-items,
+  .menu-grid     { grid-template-columns: 1fr; }
+  .contact-buttons { flex-direction: column; align-items: center; }
+  
+  /* Banner tablet */
+  .banner-container { height: 300px; }
+  .banner-title     { font-size: 2.5rem; }
+  .banner-slogan    { font-size: 1.3rem; }
+  .banner-button    {
     position: relative;
-    bottom: auto;
-    right: auto;
+    bottom: auto; right: auto;
     margin-top: 20px;
     display: inline-block;
   }
 }
 
 @media (max-width: 480px) {
-  .contact-float {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    text-align: center;
-    z-index: 999;
-  }
-}
-
-  .slogan {
-    font-size: 1rem;
-  }
-
-  .contact-float {
-    position: relative;
-    bottom: auto;
-    right: auto;
-    margin-top: 1rem;
-    text-align: center;
-    z-index: 10; /* Asegura visibilidad */
-  }
-
-  .header-content {
-    flex-direction: column;
-    text-align: center;
-    padding-top: 1rem;
-  }
-
-  h1 {
-    font-size: 1.5rem;
-  }
-
-  .section-header h2 {
-    font-size: 1.5rem;
-  }
-
-  .item {
-    padding: 1rem;
-  }
-
-  .footer-content {
-    grid-template-columns: 1fr;
-  }
-
-  .banner-container {
-    height: auto; /* Asegura que el contenido no se recorte */
-  }
-
-  .banner-title {
-    font-size: 2rem;
-  }
-
-  .banner-slogan {
-    font-size: 1rem;
-  }
-
-  .whatsapp-btn {
+  .header-text h1 { font-size: 1.5rem; }
+  .slogan        { font-size: 1rem; }
+  h1             { font-size: 1.5rem; }
+  .section-header h2 { font-size: 1.5rem; }
+  .item          { padding: 1rem; }
+  .footer-content { grid-template-columns: 1fr; }
+  
+  /* Banner móvil */
+  .banner-container { height: 200px; }
+  .banner-title     { font-size: 2rem; }
+  .banner-slogan    { font-size: 1rem; }
+  .whatsapp-btn     {
     padding: 10px 20px;
     font-size: 0.9rem;
   }
 }
 
-/* ===== ESTILOS PERSONALIZABLES DEL BANNER ===== */
-
-/* Contenedor del Banner */
+/* ===== ESTILOS DEL BANNER ===== */
 .banner-container {
   position: relative;
   width: 100%;
-  height: auto;
-  overflow: hidden;
+  height: auto;    /* que crezca con el contenido */
+  overflow: visible; /* para no recortar el botón fijo */
 }
 
-/* Imagen del Banner */
 .banner-img {
   width: 100%;
   height: auto;
   object-fit: contain;
   display: block;
-  position: relative;
-  z-index: 1;
 }
 
-/* Botón flotante de contacto */
+/* ===== BOTÓN FLOTANTE ===== */
 .contact-float {
-  position: absolute;
+  position: fixed;    /* fijo en la ventana, no importa el scroll */
   bottom: 20px;
   right: 20px;
-  z-index: 10;
-}
-
-/* Botón flotante estilo */
-.cta-button.whatsapp-float {
-  background-color: #25d366;
-  color: white;
-  padding: 10px 20px;
+  z-index: 999;
+  
+  background-color: #25d366; /* verde WhatsApp */
+  color: #fff;
+  padding: 12px 20px;
   border-radius: 30px;
   text-decoration: none;
+  
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.cta-button.whatsapp-float img {
+.contact-float img {
   width: 20px;
   height: 20px;
 }
 
-
+.contact-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
