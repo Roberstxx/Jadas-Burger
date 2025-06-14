@@ -37,20 +37,21 @@ const hamburguesas = [
 // Carga las hamburguesas en el menú
 function cargarHamburguesas() {
   const contenedor = document.querySelector('#hamburguesas .menu-items');
-  if (!contenedor) return;
-
+  
+  // Limpiar contenedor si ya tiene contenido
   contenedor.innerHTML = '';
-
+  
   hamburguesas.forEach((hamburguesa, index) => {
     const item = document.createElement('div');
     item.classList.add('item');
     item.style.setProperty('--order', index);
-
+    
+    // Añade clase 'destacado' si corresponde
     if(hamburguesa.destacado) {
       item.classList.add('destacado');
       item.innerHTML = `<div class="ribbon">¡MÁS VENDIDA!</div>`;
     }
-
+    
     item.innerHTML += `
       <h3>${hamburguesa.nombre} <span class="price">${hamburguesa.precio}</span></h3>
       <div class="img-container">
@@ -58,7 +59,7 @@ function cargarHamburguesas() {
       </div>
       <p>${hamburguesa.descripcion}</p>
     `;
-
+    
     contenedor.appendChild(item);
   });
 }
@@ -72,6 +73,7 @@ function crearBotonSubir() {
   botonArriba.title = "Ir al inicio";
   document.body.appendChild(botonArriba);
 
+  // Estilos del botón
   botonArriba.style.position = "fixed";
   botonArriba.style.bottom = "30px";
   botonArriba.style.right = "30px";
@@ -88,14 +90,17 @@ function crearBotonSubir() {
   botonArriba.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.3)";
   botonArriba.style.transition = "all 0.3s ease";
 
+  // Mostrar/ocultar al hacer scroll
   window.addEventListener("scroll", () => {
     botonArriba.style.display = window.scrollY > 300 ? "block" : "none";
   });
 
+  // Scroll suave al hacer clic
   botonArriba.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
+  // Efecto hover
   botonArriba.addEventListener("mouseenter", () => {
     botonArriba.style.backgroundColor = "#FFD700";
     botonArriba.style.transform = "translateY(-3px)";
@@ -127,19 +132,21 @@ function configurarAnimacionesScroll() {
 // === MEJORA DE INTERACCIÓN PARA BOTONES ===
 function mejorarBotones() {
   document.querySelectorAll('.cta-button').forEach(button => {
+    // Efecto al tocar (móviles)
     button.addEventListener('touchstart', () => {
       button.style.transform = 'scale(0.95)';
     });
-
+    
     button.addEventListener('touchend', () => {
       button.style.transform = 'scale(1)';
     });
-
+    
+    // Efecto al pasar el mouse (desktop)
     button.addEventListener('mouseenter', () => {
       button.style.transform = 'translateY(-3px)';
       button.style.boxShadow = '0 5px 15px rgba(255, 140, 0, 0.4)';
     });
-
+    
     button.addEventListener('mouseleave', () => {
       button.style.transform = 'translateY(0)';
       button.style.boxShadow = 'none';
@@ -147,54 +154,14 @@ function mejorarBotones() {
   });
 }
 
-// === ANIMACIÓN BOTÓN WHATSAPP EN SCROLL (MODIFICADO) ===
-function animarWhatsappFlotante() {
-  const btn = document.getElementById("whatsappBtn");
-  if (!btn) return;
-
-  const banner = document.querySelector('.banner-container');
-  const bannerHeight = banner ? banner.offsetHeight : 200;
-
-  // Asegurar transición suave
-  btn.style.transition = 'all 0.5s ease-out';
-
-  // Solo minimizar en móvil al inicio
-  if (window.innerWidth <= 768) {
-    btn.classList.add("minimized");
-  }
-
-  window.addEventListener("scroll", () => {
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
-
-    // Solo aplicar en móvil
-    if (window.innerWidth <= 768) {
-      if (scrollTop > bannerHeight * 0.8) {
-        btn.classList.remove("minimized");
-      } else {
-        btn.classList.add("minimized");
-      }
-    }
-  });
-
-  // Manejar cambios de tamaño de pantalla
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
-      btn.classList.remove("minimized");
-    } else if (window.scrollY < bannerHeight * 0.8) {
-      btn.classList.add("minimized");
-    }
-  });
-}
-
-// === INICIALIZACIÓN GENERAL ===
+// === INICIALIZACIÓN ===
 document.addEventListener('DOMContentLoaded', () => {
   cargarHamburguesas();
   crearBotonSubir();
   configurarAnimacionesScroll();
   mejorarBotones();
-  animarWhatsappFlotante();
-
-  // Precargar imágenes importantes
+  
+  // Precarga de imágenes importantes
   const preloadImages = ['logo.png', 'especial.jpg', 'hawaiana.jpg'];
   preloadImages.forEach(img => {
     const image = new Image();
