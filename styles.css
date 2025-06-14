@@ -79,31 +79,47 @@ header {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
-/* Estilo base del botón */
+/* === BOTÓN DE WHATSAPP FLOTANTE === */
 .contact-float {
   position: fixed;
-  top: 20px;
+  bottom: 20px;
   right: 20px;
-  z-index: 999;
+  background-color: #25D366;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 40px;
   display: flex;
   align-items: center;
-  background-color: #25d366;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 50px;
+  font-weight: 600;
   font-size: 1rem;
   text-decoration: none;
-  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
-  overflow: hidden;
+  z-index: 999;
 }
 
-/* Oculta el texto al inicio */
-.contact-float.minimized {
-  width: 45px;
-  padding: 10px;
-  justify-content: center;
+.contact-float img {
+  width: 24px;
+  height: 24px;
 }
+
+/* ESTADO MINIMIZADO (en la parte superior de la página) */
+.contact-float.minimized {
+  padding: 12px;
+  border-radius: 50%;
+}
+
+.contact-float.minimized .btn-text {
+  display: none;
+}
+
+/* OPCIONAL: ESCALAR AL PASAR MOUSE EN ESCRITORIO */
+@media (hover: hover) {
+  .contact-float:hover {
+    transform: scale(1.05);
+  }
+}
+
 
 /* === SECCIONES DE MENÚ === */
 .menu {
