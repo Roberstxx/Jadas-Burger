@@ -414,20 +414,26 @@ footer {
 }
 
 
+/* === ANIMACIONES === */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
-  .header-text h1 {
-    font-size: 2rem;
-  }
-  
-  .slogan {
-    font-size: 1.2rem;
-  }
-  
-  .logo-banner {
-    max-height: 200px;
-  }
-  
   h1 {
     font-size: 1.8rem;
   }
@@ -440,31 +446,18 @@ footer {
     flex-direction: column;
     align-items: center;
   }
-}
-
-@media (max-width: 480px) {
-  .header-text h1 {
-    font-size: 1.5rem;
-  }
-  
-  .slogan {
-    font-size: 1rem;
-  }
   
   .contact-float {
-    position: relative;
-    bottom: auto;
-    right: auto;
+    position: static;
     margin-top: 1rem;
-    text-align: center;
   }
   
   .header-content {
-    flex-direction: column;
-    text-align: center;
     padding-top: 1rem;
   }
-  
+}
+
+@media (max-width: 480px) {
   h1 {
     font-size: 1.5rem;
   }
@@ -481,26 +474,5 @@ footer {
     grid-template-columns: 1fr;
   }
 }
-/* Versión Responsive */
-@media (max-width: 768px) {
-  .banner-container {
-    height: 300px; /* Altura menor para tablets */
-  }
 
-  .banner-title {
-    font-size: 2.5rem;
-  }
-
-  .banner-slogan {
-    font-size: 1.3rem;
-  }
-
-  .banner-button {
-    position: relative;
-    bottom: auto;
-    right: auto;
-    margin-top: 20px;
-    display: inline-block;
-  }
-}
 
