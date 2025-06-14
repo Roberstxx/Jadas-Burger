@@ -393,23 +393,25 @@ footer {
   100% { transform: scale(1); }
 }
 
-/* === RESPONSIVE GENERAL === */
+/* === RESPONSIVE === */
 @media (max-width: 768px) {
   .header-text h1 { font-size: 2rem; }
-  .slogan        { font-size: 1.2rem; }
-  .logo-banner   { max-height: 200px; }
-  h1             { font-size: 1.8rem; }
-  .menu-items,
-  .menu-grid     { grid-template-columns: 1fr; }
-  .contact-buttons { flex-direction: column; align-items: center; }
-  
-  /* Banner tablet */
+  .slogan { font-size: 1.2rem; }
+  .logo-banner { max-height: 200px; }
+  h1 { font-size: 1.8rem; }
+  .menu-items, .menu-grid { grid-template-columns: 1fr; }
+  .contact-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
   .banner-container { height: 300px; }
-  .banner-title     { font-size: 2.5rem; }
-  .banner-slogan    { font-size: 1.3rem; }
-  .banner-button    {
+  .banner-title { font-size: 2.5rem; }
+  .banner-slogan { font-size: 1.3rem; }
+  .banner-button {
     position: relative;
-    bottom: auto; right: auto;
+    bottom: auto;
+    right: auto;
     margin-top: 20px;
     display: inline-block;
   }
@@ -417,30 +419,32 @@ footer {
 
 @media (max-width: 480px) {
   .header-text h1 { font-size: 1.5rem; }
-  .slogan        { font-size: 1rem; }
-  h1             { font-size: 1.5rem; }
+  .slogan { font-size: 1rem; }
+  h1 { font-size: 1.5rem; }
   .section-header h2 { font-size: 1.5rem; }
-  .item          { padding: 1rem; }
+  .item { padding: 1rem; }
   .footer-content { grid-template-columns: 1fr; }
-  
-  /* Banner móvil */
+
   .banner-container { height: 200px; }
-  .banner-title     { font-size: 2rem; }
-  .banner-slogan    { font-size: 1rem; }
-  .whatsapp-btn     {
+  .banner-title { font-size: 2rem; }
+  .banner-slogan { font-size: 1rem; }
+  .whatsapp-btn {
     padding: 10px 20px;
     font-size: 0.9rem;
   }
 }
 
-/* ===== ESTILOS DEL BANNER ===== */
+/* ===== ESTILOS DEL BANNER Y BOTÓN ===== */
+
+/* Contenedor del Banner */
 .banner-container {
   position: relative;
   width: 100%;
-  height: auto;    /* que crezca con el contenido */
-  overflow: visible; /* para no recortar el botón fijo */
+  height: auto;
+  overflow: hidden;
 }
 
+/* Imagen del Banner */
 .banner-img {
   width: 100%;
   height: auto;
@@ -448,24 +452,27 @@ footer {
   display: block;
 }
 
-/* ===== BOTÓN FLOTANTE ===== */
+/* Botón flotante de WhatsApp */
 .contact-float {
-  position: fixed;    /* fijo en la ventana, no importa el scroll */
+  position: fixed;
   bottom: 20px;
   right: 20px;
   z-index: 999;
-  
-  background-color: #25d366; /* verde WhatsApp */
+  background-color: #25d366;
   color: #fff;
-  padding: 12px 20px;
-  border-radius: 30px;
+  padding: 10px 16px;
+  border-radius: 40px;
   text-decoration: none;
-  
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  font-size: 14px;
   gap: 8px;
-  
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.contact-float:hover {
+  transform: scale(1.05);
 }
 
 .contact-float img {
@@ -473,7 +480,3 @@ footer {
   height: 20px;
 }
 
-.contact-float:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
