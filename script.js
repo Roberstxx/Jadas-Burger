@@ -147,7 +147,7 @@ function mejorarBotones() {
   });
 }
 
-// === ANIMACIÓN BOTÓN WHATSAPP EN SCROLL ===
+// === ANIMACIÓN BOTÓN WHATSAPP EN SCROLL (MODIFICADO) ===
 function animarWhatsappFlotante() {
   const btn = document.getElementById("whatsappBtn");
   if (!btn) return;
@@ -155,12 +155,32 @@ function animarWhatsappFlotante() {
   const banner = document.querySelector('.banner-container');
   const bannerHeight = banner ? banner.offsetHeight : 200;
 
+  // Asegurar transición suave
+  btn.style.transition = 'all 0.5s ease-out';
+
+  // Solo minimizar en móvil al inicio
+  if (window.innerWidth <= 768) {
+    btn.classList.add("minimized");
+  }
+
   window.addEventListener("scroll", () => {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
-    if (scrollTop > bannerHeight) {
+    // Solo aplicar en móvil
+    if (window.innerWidth <= 768) {
+      if (scrollTop > bannerHeight * 0.8) {
+        btn.classList.remove("minimized");
+      } else {
+        btn.classList.add("minimized");
+      }
+    }
+  });
+
+  // Manejar cambios de tamaño de pantalla
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
       btn.classList.remove("minimized");
-    } else {
+    } else if (window.scrollY < bannerHeight * 0.8) {
       btn.classList.add("minimized");
     }
   });
