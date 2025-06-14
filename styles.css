@@ -375,6 +375,10 @@ footer {
   transform: translateY(-3px);
 }
 
+
+
+/* ===== ESTILOS PERSONALIZABLES DEL BANNER ===== */
+
 /* === ANIMACIONES === */
 @keyframes fadeInUp {
   from {
@@ -393,21 +397,104 @@ footer {
   100% { transform: scale(1); }
 }
 
+/* Contenedor del Banner */
+.banner-container {
+  position: relative;
+  width: 100%;
+  height: auto; /* Deja que la altura se ajuste al contenido */
+  overflow: hidden;
+}
+
+/* Imagen del Banner */
+.banner-img {
+  width: 100%;
+  height: auto; /* Se ajusta a la imagen completa sin recortarla */
+  object-fit: contain; /* Mostrar toda la imagen */
+  display: block;
+}
+
+
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
-  .header-text h1 { font-size: 2rem; }
-  .slogan { font-size: 1.2rem; }
-  .logo-banner { max-height: 200px; }
-  h1 { font-size: 1.8rem; }
-  .menu-items, .menu-grid { grid-template-columns: 1fr; }
+  .header-text h1 {
+    font-size: 2rem;
+  }
+  
+  .slogan {
+    font-size: 1.2rem;
+  }
+  
+  .logo-banner {
+    max-height: 200px;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  .menu-items, .menu-grid {
+    grid-template-columns: 1fr;
+  }
+  
   .contact-buttons {
     flex-direction: column;
     align-items: center;
   }
+}
 
-  .banner-container { height: 300px; }
-  .banner-title { font-size: 2.5rem; }
-  .banner-slogan { font-size: 1.3rem; }
+@media (max-width: 480px) {
+  .header-text h1 {
+    font-size: 1.5rem;
+  }
+  
+  .slogan {
+    font-size: 1rem;
+  }
+  
+  .contact-float {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 1rem;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .item {
+    padding: 1rem;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+}
+/* Versión Responsive */
+@media (max-width: 768px) {
+  .banner-container {
+    height: 300px; /* Altura menor para tablets */
+  }
+
+  .banner-title {
+    font-size: 2.5rem;
+  }
+
+  .banner-slogan {
+    font-size: 1.3rem;
+  }
+
   .banner-button {
     position: relative;
     bottom: auto;
@@ -418,65 +505,22 @@ footer {
 }
 
 @media (max-width: 480px) {
-  .header-text h1 { font-size: 1.5rem; }
-  .slogan { font-size: 1rem; }
-  h1 { font-size: 1.5rem; }
-  .section-header h2 { font-size: 1.5rem; }
-  .item { padding: 1rem; }
-  .footer-content { grid-template-columns: 1fr; }
+  .banner-container {
+    height: 200px; /* Altura para móviles */
+  }
 
-  .banner-container { height: 200px; }
-  .banner-title { font-size: 2rem; }
-  .banner-slogan { font-size: 1rem; }
+  .banner-title {
+    font-size: 2rem;
+  }
+
+  .banner-slogan {
+    font-size: 1rem;
+  }
+
   .whatsapp-btn {
     padding: 10px 20px;
     font-size: 0.9rem;
   }
 }
 
-/* ===== ESTILOS DEL BANNER Y BOTÓN ===== */
-
-/* Contenedor del Banner */
-.banner-container {
-  position: relative;
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-}
-
-/* Imagen del Banner */
-.banner-img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  display: block;
-}
-
-/* Botón flotante de WhatsApp */
-.contact-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 999;
-  background-color: #25d366;
-  color: #fff;
-  padding: 10px 16px;
-  border-radius: 40px;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-  gap: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
-}
-
-.contact-float:hover {
-  transform: scale(1.05);
-}
-
-.contact-float img {
-  width: 20px;
-  height: 20px;
-}
 
