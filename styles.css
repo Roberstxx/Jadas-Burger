@@ -79,47 +79,11 @@ header {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
-/* === BOTÓN DE WHATSAPP FLOTANTE === */
 .contact-float {
   position: fixed;
-  bottom: 20px;
+  top: 20px;
   right: 20px;
-  background-color: #25D366;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 40px;
-  display: flex;
-  align-items: center;
-  font-weight: 600;
-  font-size: 1rem;
-  text-decoration: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-  z-index: 999;
-}
-
-.contact-float img {
-  width: 24px;
-  height: 24px;
-}
-
-/* ESTADO MINIMIZADO (solo en móvil) */
-@media (max-width: 768px) {
-  .contact-float.minimized {
-    padding: 12px;
-    border-radius: 50%;
-  }
-  
-  .contact-float.minimized .btn-text {
-    display: none;
-  }
-}
-
-/* OPCIONAL: ESCALAR AL PASAR MOUSE EN ESCRITORIO */
-@media (hover: hover) {
-  .contact-float:hover {
-    transform: scale(1.05);
-  }
+  z-index: 1000;
 }
 
 /* === SECCIONES DE MENÚ === */
@@ -577,7 +541,3 @@ footer {
     font-size: 0.9rem;
   }
 }
-@media (min-width: 481px) {
-      .contact-float {
-        transform: none !important;
-      }
