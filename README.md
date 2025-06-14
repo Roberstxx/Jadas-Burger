@@ -43,7 +43,7 @@ Agrega aquí una imagen si lo deseas, por ejemplo:
 
 La página puede visualizarse en Vercel (uso para pruebas):
 [https://tu-proyecto.vercel.app](#)  
-_(Reemplazar por el enlace real del proyecto cuando esté desplegado)_
+_( enlace real del proyecto cuando esté desplegado)_
 
 ## 👨‍💻 Desarrollado por
 
