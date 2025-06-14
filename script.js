@@ -31,7 +31,15 @@ const hamburguesas = [
     precio: "$50",
     imagen: "img/hawaiana.jpg",
     destacado: true
-  }
+  },
+{
+    nombre: "Mexicana",
+    descripcion: "Deliciosa hamburguesa con 100g de carne preparada con jamón, queso, tocino, cebolla frita, aguacate, totopos en julianas. Acompañada con papas a la francesa.",
+    precio: "$50",
+    imagen: "img/mexicana.jpg",
+    destacado: true
+  }
+
 ];
 
 // Carga las hamburguesas en el menú
