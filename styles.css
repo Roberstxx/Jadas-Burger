@@ -437,23 +437,23 @@ footer {
   .header-text h1 {
     font-size: 2rem;
   }
-  
+
   .slogan {
     font-size: 1.2rem;
   }
-  
+
   .logo-banner {
     max-height: 200px;
   }
-  
+
   h1 {
     font-size: 1.8rem;
   }
-  
+
   .menu-items, .menu-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .contact-buttons {
     flex-direction: column;
     align-items: center;
@@ -464,41 +464,42 @@ footer {
   .header-text h1 {
     font-size: 1.5rem;
   }
-  
+
   .slogan {
     font-size: 1rem;
   }
-  
+
   .contact-float {
     position: fixed;
-    bottom: auto;
-    right: auto;
-    margin-top: 1rem;
-    text-align: center;
+    top: 20px;
+    right: 20px;
+    transform: scale(0.85);
+    z-index: 999;
   }
-  
+
   .header-content {
     flex-direction: column;
     text-align: center;
     padding-top: 1rem;
   }
-  
+
   h1 {
     font-size: 1.5rem;
   }
-  
+
   .section-header h2 {
     font-size: 1.5rem;
   }
-  
+
   .item {
     padding: 1rem;
   }
-  
+
   .footer-content {
     grid-template-columns: 1fr;
   }
 }
+
 /* Versión Responsive */
 @media (max-width: 768px) {
   .banner-container {
