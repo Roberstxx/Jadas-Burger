@@ -544,6 +544,12 @@ footer {
   .item {
     padding: 1rem;
   }
+  @media (max-width: 480px) {
+  .contact-float {
+    transform: scale(0.85);
+  }
+}
+
 }
 
 
