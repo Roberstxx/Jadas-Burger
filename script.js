@@ -167,4 +167,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const image = new Image();
     image.src = `img/${img}`;
   });
+  
+  document.addEventListener("DOMContentLoaded", function () {
+    const btn = document.getElementById("whatsappBtn");
+
+    function checkScroll() {
+      const banner = document.querySelector(".banner-container");
+      const bannerBottom = banner.getBoundingClientRect().bottom;
+
+      if (bannerBottom < 50) {
+        btn.classList.remove("minimized"); // Mostrar texto
+      } else {
+        btn.classList.add("minimized"); // Solo bolita
+      }
+    }
+
+    window.addEventListener("scroll", checkScroll);
+    checkScroll(); // Ejecutar al cargar
+  });
+
+
 });
