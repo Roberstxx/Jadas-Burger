@@ -375,6 +375,83 @@ footer {
   transform: translateY(-3px);
 }
 
+/* === SECCIÓN DE PROMOCIONES === */
+.promo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 0 1rem;
+}
+
+.promo-card {
+  background: linear-gradient(135deg, var(--dark), var(--dark-gray));
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--primary);
+  box-shadow: 0 5px 15px rgba(255, 140, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.promo-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: var(--accent);
+}
+
+.promo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(255, 140, 0, 0.3);
+}
+
+.promo-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.promo-day {
+  font-size: 1.5rem;
+  color: var(--accent);
+  margin-right: 1rem;
+  font-weight: 700;
+}
+
+.promo-title {
+  font-size: 1.3rem;
+  color: var(--light);
+  margin-bottom: 0.5rem;
+}
+
+.promo-desc {
+  color: var(--gray);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.promo-price {
+  font-size: 1.2rem;
+  color: var(--primary);
+  font-weight: 700;
+  text-align: right;
+}
+
+.promo-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: var(--accent);
+  color: var(--darker);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
 
 
 /* ===== ESTILOS PERSONALIZABLES DEL BANNER ===== */
