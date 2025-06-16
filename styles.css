@@ -1,332 +1,690 @@
-// === CARGA DINÁMICA DE HAMBURGUESAS ===
-const hamburguesas = [
-  {
-    nombre: "Jada Especial",
-    descripcion: "Hamburguesa 100gr carne preparada con jamón, queso, tocino, cebolla caramelizada, aguacate, salchicha para asar.",
-    precio: "$65",
-    imagen: "img/especial.jpg",
-    destacado: true
-  },
-  {
-    nombre: "Champiñones",
-    descripcion: "Exquisita carne 100 gr. preparada con jamón, queso, tocino, cebolla, generosos champiñones rebanados.",
-    precio: "$55",
-    imagen: "img/champinones.jpg"
-  },
-  {
-    nombre: "Chicken Burguer",
-    descripcion: "Pechuga de pollo empanizada, queso, cebolla, tomate, lechuga y aderezo de la casa.",
-    precio: "$50",
-    imagen: "img/chicken.jpg"
-  },
-  {
-    nombre: "Clásica",
-    descripcion: "Carne 100 gr. preparada con jamón, queso, tocino, acompañada con papas a la francesa.",
-    precio: "$50",
-    imagen: "img/clasica.jpg"
-  },
-  {
-    nombre: "Hawaiana",
-    descripcion: "Deliciosa hamburguesa preparada con jamón, queso, tocino, salchicha y piña natural.",
-    precio: "$50",
-    imagen: "img/hawaiana.jpg",
-    destacado: true
-  },
-{
-    nombre: "Mexicana",
-    descripcion: "Deliciosa hamburguesa con 100g de carne preparada con jamón, queso, tocino, cebolla frita, aguacate, totopos en julianas. Acompañada con papas a la francesa.",
-    precio: "$50",
-    imagen: "img/mexicana.jpg",
-    destacado: true
-  }
+/* === VARIABLES Y ESTILOS GENERALES === */
+:root {
+  --primary: #FF8C00;
+  --secondary: #FFA500;
+  --accent: #FFD700;
+  --dark: #111;
+  --darker: #000;
+  --light: #FFF;
+  --gray: #AAA;
+  --dark-gray: #333;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  background-color: var(--darker);
+  color: var(--light);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+/* === ENCABEZADO MEJORADO === */
+header {
+  position: relative;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background-color: var(--darker);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.header-content {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.logo-banner {
+  width: 50%;
+  max-height: 300px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.header-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  z-index: 2;
+}
+
+.header-text h1 {
+  color: var(--primary);
+  font-size: 3rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.slogan {
+  color: var(--accent);
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.contact-float {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+/* === SECCIONES DE MENÚ === */
+.menu {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.section-header h2 {
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.section-header h2::after {
+  content: '';
+  position: absolute;
+  width: 50%;
+  height: 3px;
+  background: var(--secondary);
+  bottom: -8px;
+  left: 25%;
+}
+
+.section-subtitle {
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+.menu-items, .menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 0 1rem;
+}
+
+.item {
+  background-color: var(--dark);
+  border: 1px solid var(--dark-gray);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease forwards;
+  animation-delay: calc(var(--order) * 0.1s);
+  position: relative;
+  overflow: hidden;
+}
+
+.item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.item:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 10px 25px rgba(255, 140, 0, 0.2);
+  border-color: var(--primary);
+}
+
+.item:hover::before {
+  transform: scaleX(1);
+}
+
+.item h3 {
+  color: var(--accent);
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.emoji {
+  font-size: 1.2rem;
+}
+
+.item ul {
+  list-style: none;
+}
+
+.item ul li {
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed var(--dark-gray);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  background-color: var(--primary);
+  color: var(--darker);
+  padding: 0.2rem 0.5rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.salsas li {
+  border-bottom: none !important;
+  padding: 0.3rem 0 !important;
+}
+
+.spicy {
+  letter-spacing: 2px;
+}
+
+.item img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 1rem 0;
+  border: 1px solid var(--dark-gray);
+}
+
+.item p {
+  color: var(--gray);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* === SECCIÓN DE CONTACTO === */
+.contact-section {
+  background: linear-gradient(to right, var(--dark), var(--darker));
+  padding: 3rem 1rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.contact-section h2 {
+  color: var(--light);
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.contact-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--primary);
+  color: var(--darker);
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.cta-button:hover {
+  background-color: transparent;
+  color: var(--primary);
+  border-color: var(--primary);
+  transform: translateY(-3px);
+}
+
+.cta-button img {
+  width: 20px;
+  height: 20px;
+}
+
+.whatsapp {
+  background-color: #25D366;
+  color: white;
+}
+
+.whatsapp:hover {
+  background-color: transparent;
+  color: #25D366;
+  border-color: #25D366;
+}
+
+/* === FOOTER === */
+footer {
+  background-color: var(--dark);
+  padding: 3rem 1rem 1.5rem;
+  color: var(--gray);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footer-section h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--primary);
+}
+
+.footer-section p {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.footer-logo {
+  width: 60px;
+  margin-bottom: 1rem;
+}
+
+.icon {
+  width: 16px;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+.redes {
+  display: flex;
+  gap: 1rem;
+}
+
+.redes a img {
+  width: 28px;
+  transition: transform 0.3s ease;
+}
+
+.redes a:hover img {
+  transform: scale(1.2);
+}
+
+.copyright {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--dark-gray);
+  font-size: 0.8rem;
+}
+
+/* === BOTÓN FLOTANTE === */
+#btnArriba {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: var(--darker);
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: none;
+  z-index: 99;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+#btnArriba:hover {
+  background-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+/* === SECCIÓN DE PROMOCIONES === */
+.promo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 0 1rem;
+}
+
+.promo-card {
+  background: linear-gradient(135deg, var(--dark), var(--dark-gray));
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--primary);
+  box-shadow: 0 5px 15px rgba(255, 140, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.promo-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: var(--accent);
+}
+
+.promo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(255, 140, 0, 0.3);
+}
+
+.promo-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.promo-day {
+  font-size: 1.5rem;
+  color: var(--accent);
+  margin-right: 1rem;
+  font-weight: 700;
+}
+
+.promo-title {
+  font-size: 1.3rem;
+  color: var(--light);
+  margin-bottom: 0.5rem;
+}
+
+.promo-desc {
+  color: var(--gray);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.promo-price {
+  font-size: 1.2rem;
+  color: var(--primary);
+  font-weight: 700;
+  text-align: right;
+}
+
+.promo-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: var(--accent);
+  color: var(--darker);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
 
 
+/* ===== ESTILOS PERSONALIZABLES DEL BANNER ===== */
 
-];
-
-// Promociones por día (agregar esto en tu script.js)
-const promociones = [
-  
-  {
-    dia: "Martes",
-    titulo: "Boneles",
-    descripcion: "  10 piezas Mango habanero, Mango, Búfalo, Hot y BBQ. Un sabor a elegir.",
-    precio: "$99",
-    destacado: true,
-    imagenes: ["img/MartesBoneles10p.png"]
-  },
-  {
-    dia: "Miércoles",
-    titulo: "Combo Hamburguesa, Boneles y papas",
-    descripcion: "Hamburguesa, (Mexicana, Hawaiana, Champiñones y Clasica) + 3 Boneles a 1 sabor a elegir, (Mango Habanero, Mango Búfalo, BBQ y Hot).",
-    precio: "$80",
-    destacado: false,
-    imagenes: ["img/MiercolesHamburgesas.png"]
-  },
-  {
-    dia: "Jueves",
-    titulo: "Alitas",
-    descripcion: "10 piezas.",
-    precio: "$99",
-    destacado: false,
-    imagenes: ["img/10Alitasx99.png"]
-  },
-  {
-    dia: "Viernes",
-    titulo: "Happy Hour",
-    descripcion: "10 Alitas con papas o 10 Boneles con papas.",
-    precio: "120",
-    destacado: true,
-    imagenes: ["img/AlitasyBoneles.jpg"]
-  },
-  {
-    dia: "Viernes",
-    titulo: "two happy hour",
-    descripcion: "2 Chicken.",
-    precio: "100",
-    destacado: true,
-    imagenes: ["img/2chickenx100.png"]   
+/* === ANIMACIONES === */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  
-];
-
-function cargarPromociones() {
-  const promoContainer = document.querySelector('.promo-grid');
-  
-  // Obtener el día actual (0=Domingo, 1=Lunes, etc.)
-  const hoy = new Date().getDay();
-  
-  // Mapear números de día a nombres en español
-  const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-  const diaActualNombre = diasSemana[hoy];
-  
-  // Ordenar promociones para que empiece por el día actual
-  const promocionesOrdenadas = [...promociones].sort((a, b) => {
-    // Encontrar índices de los días en el array diasSemana
-    const indexA = diasSemana.indexOf(a.dia);
-    const indexB = diasSemana.indexOf(b.dia);
-    
-    // Calcular diferencia relativa al día actual
-    const diffA = (indexA - hoy + 7) % 7;
-    const diffB = (indexB - hoy + 7) % 7;
-    
-    return diffA - diffB;
-  });
-  
-  // Generar las tarjetas de promoción
-  promocionesOrdenadas.forEach(promo => {
-    const promoCard = document.createElement('div');
-    promoCard.className = 'promo-card';
-    
-    // Resaltar si es el día actual
-    const esHoy = promo.dia === diaActualNombre;
-    
-    // Construir el carrusel de imágenes si existen
-    let carruselHTML = '';
-    if (promo.imagenes && promo.imagenes.length > 0) {
-      carruselHTML = `
-        <div class="promo-carousel">
-          ${promo.imagenes.map((img, i) => `
-            <img src="${img}" alt="${promo.titulo}" loading="lazy" class="${i === 0 ? 'active' : ''}">
-          `).join('')}
-        </div>
-      `;
-    }
-    
-    promoCard.innerHTML = `
-      ${promo.destacado ? '<span class="promo-badge destacado-badge">¡Destacado!</span>' : ''}
-      ${esHoy ? '<span class="promo-badge hoy-badge">¡HOY!</span>' : ''}
-      
-      ${carruselHTML}
-      
-      <div class="promo-content">
-        <div class="promo-header">
-          <span class="promo-day">${promo.dia}</span>
-        </div>
-        <h3 class="promo-title">${promo.titulo}</h3>
-        <p class="promo-desc">${promo.descripcion}</p>
-        ${promo.precio ? `<div class="promo-price">${promo.precio}</div>` : ''}
-      </div>
-    `;
-    
-    // Estilos adicionales para el día actual
-    if (esHoy) {
-      promoCard.style.border = '2px solid var(--accent)';
-      promoCard.style.boxShadow = '0 0 15px rgba(255, 215, 0, 0.5)';
-    }
-    
-    promoContainer.appendChild(promoCard);
-  });
-  
-  // Inicializar carruseles después de crear las tarjetas
-  inicializarCarruseles();
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-function inicializarCarruseles() {
-  document.querySelectorAll('.promo-carousel').forEach(carrusel => {
-    const imagenes = carrusel.querySelectorAll('img');
-    let currentIndex = 0;
-    let intervalo;
-    
-    if (imagenes.length > 1) {
-      // Función para cambiar de imagen
-      const cambiarImagen = () => {
-        imagenes[currentIndex].classList.remove('active');
-        currentIndex = (currentIndex + 1) % imagenes.length;
-        imagenes[currentIndex].classList.add('active');
-      };
-      
-      // Iniciar el intervalo (cambia cada 3 segundos)
-      intervalo = setInterval(cambiarImagen, 3000);
-      
-      // Pausar al pasar el mouse
-      carrusel.addEventListener('mouseenter', () => {
-        clearInterval(intervalo);
-      });
-      
-      // Reanudar al quitar el mouse
-      carrusel.addEventListener('mouseleave', () => {
-        intervalo = setInterval(cambiarImagen, 3000);
-      });
-    }
-  });
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
-// Llamar a la función cuando el DOM esté cargado
-document.addEventListener('DOMContentLoaded', cargarPromociones);
-
-// Carga las hamburguesas en el menú
-function cargarHamburguesas() {
-  const contenedor = document.querySelector('#hamburguesas .menu-items');
-  
-  // Limpiar contenedor si ya tiene contenido
-  contenedor.innerHTML = '';
-  
-  hamburguesas.forEach((hamburguesa, index) => {
-    const item = document.createElement('div');
-    item.classList.add('item');
-    item.style.setProperty('--order', index);
-    
-    // Añade clase 'destacado' si corresponde
-    if(hamburguesa.destacado) {
-      item.classList.add('destacado');
-      item.innerHTML = `<div class="ribbon">¡MÁS VENDIDA!</div>`;
-    }
-    
-    item.innerHTML += `
-      <h3>${hamburguesa.nombre} <span class="price">${hamburguesa.precio}</span></h3>
-      <div class="img-container">
-        <img src="${hamburguesa.imagen}" alt="${hamburguesa.nombre}" loading="lazy">
-      </div>
-      <p>${hamburguesa.descripcion}</p>
-    `;
-    
-    contenedor.appendChild(item);
-  });
+/* Contenedor del Banner */
+.banner-container {
+  position: relative;
+  width: 100%;
+  height: auto; /* Deja que la altura se ajuste al contenido */
+  overflow: hidden;
 }
 
-// === BOTÓN DE "IR ARRIBA" ===
-function crearBotonSubir() {
-  const botonArriba = document.createElement("button");
-  botonArriba.innerHTML = "↑";
-  botonArriba.id = "btnArriba";
-  botonArriba.ariaLabel = "Volver arriba";
-  botonArriba.title = "Ir al inicio";
-  document.body.appendChild(botonArriba);
-
-  // Estilos del botón
-  botonArriba.style.position = "fixed";
-  botonArriba.style.bottom = "30px";
-  botonArriba.style.right = "30px";
-  botonArriba.style.width = "50px";
-  botonArriba.style.height = "50px";
-  botonArriba.style.borderRadius = "50%";
-  botonArriba.style.backgroundColor = "#FF8C00";
-  botonArriba.style.color = "#000";
-  botonArriba.style.border = "none";
-  botonArriba.style.fontSize = "1.5rem";
-  botonArriba.style.cursor = "pointer";
-  botonArriba.style.display = "none";
-  botonArriba.style.zIndex = "99";
-  botonArriba.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.3)";
-  botonArriba.style.transition = "all 0.3s ease";
-
-  // Mostrar/ocultar al hacer scroll
-  window.addEventListener("scroll", () => {
-    botonArriba.style.display = window.scrollY > 300 ? "block" : "none";
-  });
-
-  // Scroll suave al hacer clic
-  botonArriba.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-
-  // Efecto hover
-  botonArriba.addEventListener("mouseenter", () => {
-    botonArriba.style.backgroundColor = "#FFD700";
-    botonArriba.style.transform = "translateY(-3px)";
-  });
-
-  botonArriba.addEventListener("mouseleave", () => {
-    botonArriba.style.backgroundColor = "#FF8C00";
-    botonArriba.style.transform = "translateY(0)";
-  });
+/* Imagen del Banner */
+.banner-img {
+  width: 100%;
+  height: auto; /* Se ajusta a la imagen completa sin recortarla */
+  object-fit: contain; /* Mostrar toda la imagen */
+  display: block;
 }
 
-// === ANIMACIONES AL SCROLL ===
-function configurarAnimacionesScroll() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) {
-        entry.target.style.opacity = 1;
-        entry.target.style.transform = "translateY(0)";
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
 
-  document.querySelectorAll('.item, .section-header').forEach(el => {
-    observer.observe(el);
-  });
+/* Estilos para las tarjetas de promoción con imágenes */
+.promo-card {
+  position: relative;
+  background: linear-gradient(135deg, var(--dark), var(--dark-gray));
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
-// === MEJORA DE INTERACCIÓN PARA BOTONES ===
-function mejorarBotones() {
-  document.querySelectorAll('.cta-button').forEach(button => {
-    // Efecto al tocar (móviles)
-    button.addEventListener('touchstart', () => {
-      button.style.transform = 'scale(0.95)';
-    });
-    
-    button.addEventListener('touchend', () => {
-      button.style.transform = 'scale(1)';
-    });
-    
-    // Efecto al pasar el mouse (desktop)
-    button.addEventListener('mouseenter', () => {
-      button.style.transform = 'translateY(-3px)';
-      button.style.boxShadow = '0 5px 15px rgba(255, 140, 0, 0.4)';
-    });
-    
-    button.addEventListener('mouseleave', () => {
-      button.style.transform = 'translateY(0)';
-      button.style.boxShadow = 'none';
-    });
-  });
+.promo-carousel {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
 }
 
-// === INICIALIZACIÓN ===
-document.addEventListener('DOMContentLoaded', () => {
-  cargarHamburguesas();
-  crearBotonSubir();
-  configurarAnimacionesScroll();
-  mejorarBotones();
-  
-  // Precarga de imágenes importantes
-  const preloadImages = ['logo.png', 'especial.jpg', 'hawaiana.jpg'];
-  preloadImages.forEach(img => {
-    const image = new Image();
-    image.src = `img/${img}`;
-  });
-});
+.promo-carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.promo-carousel img.active {
+  opacity: 1;
+}
+
+.promo-content {
+  padding: 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Badges de promoción */
+.promo-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  z-index: 2;
+}
+
+.destacado-badge {
+  background-color: var(--primary);
+  color: var(--darker);
+}
+
+.hoy-badge {
+  background-color: var(--accent);
+  color: var(--darker);
+  top: 45px; /* Para cuando hay dos badges */
+}
+
+/* Efectos hover */
+.promo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(255, 140, 0, 0.3);
+}
+
+
+/* === ANIMACIONES === */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .header-text h1 {
+    font-size: 2rem;
+  }
+
+  .slogan {
+    font-size: 1.2rem;
+  }
+
+  .logo-banner {
+    max-height: 200px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .menu-items, .menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-text h1 {
+    font-size: 1.5rem;
+  }
+
+  .slogan {
+    font-size: 1rem;
+  }
+
+  .contact-float {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    transform: scale(0.85);
+    z-index: 999;
+  }
+
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 1rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .item {
+    padding: 1rem;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Versión Responsive */
+@media (max-width: 768px) {
+  .banner-container {
+    height: 300px; /* Altura menor para tablets */
+  }
+
+  .banner-title {
+    font-size: 2.5rem;
+  }
+
+  .banner-slogan {
+    font-size: 1.3rem;
+  }
+
+  .banner-button {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin-top: 20px;
+    display: inline-block;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-container {
+    height: 200px; /* Altura para móviles */
+  }
+
+  .banner-title {
+    font-size: 2rem;
+  }
+
+  .banner-slogan {
+    font-size: 1rem;
+  }
+
+  .whatsapp-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
