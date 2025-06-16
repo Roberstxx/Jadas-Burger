@@ -40,59 +40,55 @@ const hamburguesas = [
     destacado: true
   }
 
+
+
 ];
 
 // Promociones por día (agregar esto en tu script.js)
 const promociones = [
-  {
-    dia: "Lunes",
-    titulo: "2x1 en Hamburguesas Clásicas",
-    descripcion: "Compra una hamburguesa clásica y lleva otra gratis. No aplica con otras promociones.",
-    precio: "",
-    destacado: false
-  },
+  
   {
     dia: "Martes",
-    titulo: "Alitas Ilimitadas",
-    descripcion: "Todo lo que puedas comer de nuestras deliciosas alitas por 2 horas.",
-    precio: "$199",
-    destacado: true
+    titulo: "Boneles",
+    descripcion: "  10 piezas Mango habanero, Mango, Búfalo, Hot y BBQ. Un sabor a elegir.",
+    precio: "$99",
+    destacado: true,
+    imagenes: ["img/MartesBoneles10p.png"]
   },
   {
     dia: "Miércoles",
-    titulo: "Combo Familiar",
-    descripcion: "2 hamburguesas + 2 papas + 2 refrescos + 10 alitas.",
-    precio: "$299",
-    destacado: false
+    titulo: "Combo Hamburguesa, Boneles y papas",
+    descripcion: "Hamburguesa, (Mexicana, Hawaiana, Champiñones y Clasica) + 3 Boneles a 1 sabor a elegir, (Mango Habanero, Mango Búfalo, BBQ y Hot).",
+    precio: "$80",
+    destacado: false,
+    imagenes: ["img/MiercolesHamburgesas.png"]
   },
   {
     dia: "Jueves",
-    titulo: "Boneless + Refresco",
-    descripcion: "15 piezas de boneless + refresco de 600ml.",
-    precio: "$150",
-    destacado: false
+    titulo: "Alitas",
+    descripcion: "10 piezas.",
+    precio: "$99",
+    destacado: false,
+    imagenes: ["img/10Alitasx99.png"]
   },
   {
     dia: "Viernes",
     titulo: "Happy Hour",
-    descripcion: "20% de descuento en todas las bebidas alcohólicas de 6pm a 8pm.",
-    precio: "",
-    destacado: true
+    descripcion: "10 Alitas con papas o 10 Boneles con papas.",
+    precio: "120",
+    destacado: true,
+    imagenes: ["img/AlitasyBoneles.jpg"]
   },
   {
-    dia: "Sábado",
-    titulo: "Combo Burger + Alitas",
-    descripcion: "1 hamburguesa especial + 10 alitas + papas + refresco.",
-    precio: "$249",
-    destacado: false
-  },
-  {
-    dia: "Domingo",
-    titulo: "Día Familiar",
-    descripcion: "15% de descuento en pedidos mayores a $400. Válido todo el día.",
-    precio: "",
-    destacado: false
+    dia: "Viernes",
+    titulo: "two happy hour",
+    descripcion: "2 Chicken.",
+    precio: "100",
+    destacado: true,
+    imagenes: ["img/2chickenx100.png"]   
   }
+  
+  
 ];
 
 function cargarPromociones() {
@@ -126,15 +122,32 @@ function cargarPromociones() {
     // Resaltar si es el día actual
     const esHoy = promo.dia === diaActualNombre;
     
+    // Construir el carrusel de imágenes si existen
+    let carruselHTML = '';
+    if (promo.imagenes && promo.imagenes.length > 0) {
+      carruselHTML = `
+        <div class="promo-carousel">
+          ${promo.imagenes.map((img, i) => `
+            <img src="${img}" alt="${promo.titulo}" loading="lazy" class="${i === 0 ? 'active' : ''}">
+          `).join('')}
+        </div>
+      `;
+    }
+    
     promoCard.innerHTML = `
-      ${promo.destacado ? '<span class="promo-badge">¡Destacado!</span>' : ''}
-      ${esHoy ? '<span class="promo-badge" style="background-color: var(--accent); color: var(--darker);">¡HOY!</span>' : ''}
-      <div class="promo-header">
-        <span class="promo-day">${promo.dia}</span>
+      ${promo.destacado ? '<span class="promo-badge destacado-badge">¡Destacado!</span>' : ''}
+      ${esHoy ? '<span class="promo-badge hoy-badge">¡HOY!</span>' : ''}
+      
+      ${carruselHTML}
+      
+      <div class="promo-content">
+        <div class="promo-header">
+          <span class="promo-day">${promo.dia}</span>
+        </div>
+        <h3 class="promo-title">${promo.titulo}</h3>
+        <p class="promo-desc">${promo.descripcion}</p>
+        ${promo.precio ? `<div class="promo-price">${promo.precio}</div>` : ''}
       </div>
-      <h3 class="promo-title">${promo.titulo}</h3>
-      <p class="promo-desc">${promo.descripcion}</p>
-      ${promo.precio ? `<div class="promo-price">${promo.precio}</div>` : ''}
     `;
     
     // Estilos adicionales para el día actual
@@ -145,7 +158,41 @@ function cargarPromociones() {
     
     promoContainer.appendChild(promoCard);
   });
+  
+  // Inicializar carruseles después de crear las tarjetas
+  inicializarCarruseles();
 }
+
+function inicializarCarruseles() {
+  document.querySelectorAll('.promo-carousel').forEach(carrusel => {
+    const imagenes = carrusel.querySelectorAll('img');
+    let currentIndex = 0;
+    let intervalo;
+    
+    if (imagenes.length > 1) {
+      // Función para cambiar de imagen
+      const cambiarImagen = () => {
+        imagenes[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % imagenes.length;
+        imagenes[currentIndex].classList.add('active');
+      };
+      
+      // Iniciar el intervalo (cambia cada 3 segundos)
+      intervalo = setInterval(cambiarImagen, 3000);
+      
+      // Pausar al pasar el mouse
+      carrusel.addEventListener('mouseenter', () => {
+        clearInterval(intervalo);
+      });
+      
+      // Reanudar al quitar el mouse
+      carrusel.addEventListener('mouseleave', () => {
+        intervalo = setInterval(cambiarImagen, 3000);
+      });
+    }
+  });
+}
+
 // Llamar a la función cuando el DOM esté cargado
 document.addEventListener('DOMContentLoaded', cargarPromociones);
 
