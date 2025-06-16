@@ -491,6 +491,76 @@ footer {
 }
 
 
+/* Estilos para las tarjetas de promoción con imágenes */
+.promo-card {
+  position: relative;
+  background: linear-gradient(135deg, var(--dark), var(--dark-gray));
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.promo-carousel {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.promo-carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.promo-carousel img.active {
+  opacity: 1;
+}
+
+.promo-content {
+  padding: 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Badges de promoción */
+.promo-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  z-index: 2;
+}
+
+.destacado-badge {
+  background-color: var(--primary);
+  color: var(--darker);
+}
+
+.hoy-badge {
+  background-color: var(--accent);
+  color: var(--darker);
+  top: 45px; /* Para cuando hay dos badges */
+}
+
+/* Efectos hover */
+.promo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(255, 140, 0, 0.3);
+}
+
+
 /* === ANIMACIONES === */
 @keyframes fadeInUp {
   from {
@@ -618,3 +688,4 @@ footer {
     font-size: 0.9rem;
   }
 }
+
