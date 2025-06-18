@@ -10,6 +10,60 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="img/logo.png" type="image/png">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <style>
+  .contact-float {
+    position: fixed;
+    top: 20px;   /* ¡Cambia de 'bottom' a 'top'! */
+    right: 20px;
+    z-index: 1000;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    border-radius: 30px;
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 60px;
+    height: 60px;
+    padding: 0;
+}
+        
+        .contact-float:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(37, 211, 102, 0.4);
+        }
+        
+        .contact-float-icon {
+             width: 30px;
+            height: 30px;
+            fill: white;
+            flex-shrink: 0;
+            margin-left: 15px;
+            transition: margin-left 0.4s ease;
+        }
+        
+        .contact-float-text {
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            white-space: nowrap;
+            margin-left: 12px;
+            opacity: 0;
+            transform: translateX(10px);
+            font-family: 'Poppins', sans-serif;
+        }
+        .contact-float {
+    /* ... tus estilos existentes ... */
+    text-decoration: none; /* Añade esta línea para quitar el subrayado */
+}
+         
+    </style>
 </head>
 <body>
   <header>
@@ -19,13 +73,19 @@
         <h1 class="banner-title">JADA BURGUER</h1>
         <p class="banner-slogan">Hamburguesas & Alitas Artesanales</p>
       </div>
-      <div class="contact-float">
-        <a href="https://wa.me/529811939135?text=¡Hola!%20Quisiera%20hacer%20un%20pedido%20en%20Jada%20Burguer" class="cta-button whatsapp-float">
-          <img src="img/icons8-whatsapp.svg" alt="WhatsApp"> ¡Ordena por WhatsApp!
+      <div id="contact-float-container">
+        <a href="https://wa.me/529811939135?text=¡Hola!%20Quisiera%20hacer%20un%20pedido%20en%20Jada%20Burguer" class="contact-float" target="_blank" rel="noopener noreferrer">
+          <svg class="contact-float-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path fill="white" d="M16.004 0C7.174 0 0 7.176 0 16c0 2.84.74 5.668 2.145 8.137L.745 32l8.004-2.093C11.14 31.243 13.547 32 16.004 32 24.826 32 32 24.822 32 16S24.826 0 16.004 0zm0 29.297c-2.317 0-4.594-.622-6.598-1.799l-.472-.281-4.892 1.279 1.305-4.77-.309-.489a13.252 13.252 0 01-2.012-7.237c0-7.347 5.981-13.328 13.328-13.328S29.682 8.653 29.682 16c0 7.347-5.981 13.297-13.328 13.297zm7.315-9.977c-.4-.201-2.37-1.169-2.74-1.304-.369-.134-.637-.201-.906.201-.269.402-1.041 1.304-1.276 1.572-.234.269-.469.302-.871.101s-1.698-.626-3.235-1.996c-1.196-1.067-2.004-2.383-2.239-2.785-.234-.402-.025-.62.176-.82.18-.18.402-.469.603-.703.201-.234.268-.402.402-.67.134-.269.067-.502-.034-.703-.101-.201-.906-2.183-1.24-2.987-.325-.783-.657-.677-.906-.69-.234-.012-.502-.015-.77-.015s-.703.101-1.072.502c-.369.402-1.407 1.375-1.407 3.355s1.441 3.888 1.642 4.157c.201.268 2.836 4.332 6.87 6.076.96.414 1.708.662 2.292.847.964.307 1.841.263 2.533.159.772-.115 2.378-.973 2.713-1.912s.335-1.744.234-1.912c-.1-.168-.369-.268-.77-.469z"/>
+          </svg>
+          <span class="contact-float-text">¡Ordena por WhatsApp!</span>
         </a>
       </div>
     </div>
   </header>
+
+  <!-- El resto de tu HTML sigue igual aquí -->
+
 
   <section class="menu" id="hamburguesas">
     <div class="section-header">
@@ -33,8 +93,7 @@
       <p class="section-subtitle">100% carne artesanal con ingredientes frescos</p>
     </div>
     <div class="menu-items">
-      <!-- Las hamburguesas se cargan dinámicamente desde JS -->
-    </div>
+      </div>
   </section>
 
   <section class="menu" id="otros">
@@ -91,8 +150,7 @@
   </div>
   
   <div class="promo-grid">
-    <!-- Las promociones se cargarán dinámicamente desde JS -->
-  </div>
+    </div>
 </section>
 
   <section class="contact-section">
@@ -137,10 +195,161 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js"></script> 
+  
   <script>
     document.getElementById('current-year').textContent = new Date().getFullYear();
   </script>
+
+  <script>
+        // Registrar ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Variables
+        let lastScrollY = 0;
+        let isExpanded = false;
+        const contactFloat = document.querySelector('.contact-float');
+        const contactFloatText = document.querySelector('.contact-float-text');
+        
+        // Timeline para las animaciones
+        const expandTl = gsap.timeline({ paused: true });
+        const contractTl = gsap.timeline({ paused: true });
+        
+        // Configurar animaciones
+        expandTl
+            .to(contactFloat, {
+                width: "280px",
+                paddingRight: "20px",
+                duration: 0.4,
+                ease: "power2.out"
+            })
+            .to(".contact-float-icon", {
+                marginLeft: "20px",
+                duration: 0.4,
+                ease: "power2.out"
+            }, 0)
+            .to(contactFloatText, {
+                opacity: 1,
+                x: 0,
+                duration: 0.3,
+                ease: "power2.out"
+            }, "-=0.2");
+            
+        contractTl
+            .to(contactFloatText, {
+                opacity: 0,
+                x: 10,
+                duration: 0.2,
+                ease: "power2.in"
+            })
+            .to(contactFloat, {
+                width: "60px",
+                paddingRight: "0px",
+                duration: 0.3,
+                ease: "power2.in"
+            }, "-=0.1")
+            .to(".contact-float-icon", {
+                marginLeft: "15px",
+                duration: 0.3,
+                ease: "power2.in"
+            }, "-=0.3");
+        
+        // Función para expandir el botón
+        function expandButton() {
+            if (!isExpanded) {
+                contractTl.pause();
+                expandTl.restart();
+                isExpanded = true;
+            }
+        }
+        
+        // Función para contraer el botón
+        function contractButton() {
+            if (isExpanded) {
+                expandTl.pause();
+                contractTl.restart();
+                isExpanded = false;
+            }
+        }
+        
+        // Detectar dirección del scroll
+        function handleScroll() {
+            const currentScrollY = window.scrollY;
+            
+            // Si estamos en el top, contraer siempre
+            if (currentScrollY < 100) {
+                contractButton();
+            } else {
+                // Detectar dirección del scroll
+                if (currentScrollY > lastScrollY) {
+                    // Scrolling hacia abajo - expandir
+                    expandButton();
+                } else {
+                    // Scrolling hacia arriba - contraer
+                    contractButton();
+                }
+            }
+            
+            lastScrollY = currentScrollY;
+        }
+        
+        // Event listeners
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        
+        // Click handler para el botón
+        contactFloat.addEventListener('click', function() {
+            const phoneNumber = "529811939135"; // Reemplaza con tu número
+            const message = "¡Hola! Me interesa hacer un pedido en Jada Burguer";
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+        
+        // Animación inicial del botón (fade in)
+        gsap.fromTo(contactFloat, 
+            { 
+                scale: 0,
+                opacity: 0 
+            },
+            { 
+                scale: 1,
+                opacity: 1,
+                duration: 0.5,
+                ease: "back.out(1.7)",
+                delay: 1
+            }
+        );
+        
+        // Animación de hover mejorada
+        contactFloat.addEventListener('mouseenter', function() {
+            gsap.to(this, {
+                scale: 1.05,
+                duration: 0.2,
+                ease: "power2.out"
+            });
+        });
+        
+        contactFloat.addEventListener('mouseleave', function() {
+            gsap.to(this, {
+                scale: 1,
+                duration: 0.2,
+                ease: "power2.out"
+            });
+        });
+        
+        // Inicializar estado
+        contractButton();
+        
+        // Configurar dark mode
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+    </script>
 </body>
 </html>
-
