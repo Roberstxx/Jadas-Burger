@@ -1,166 +1,110 @@
-// === CARGA DINÁMICA DE HAMBURGUESAS ===
-const hamburguesas = [
-  {
-    nombre: "Jada Especial",
-    descripcion: "Hamburguesa 100gr carne preparada con jamón, queso, tocino, cebolla caramelizada, aguacate, salchicha para asar.",
-    precio: "$65",
-    imagen: "img/especial.jpg",
-    destacado: true
-  },
-  {
-    nombre: "Champiñones",
-    descripcion: "Exquisita carne 100 gr. preparada con jamón, queso, tocino, cebolla, generosos champiñones rebanados.",
-    precio: "$55",
-    imagen: "img/champinones.jpg"
-  },
-  {
-    nombre: "Chicken Burguer",
-    descripcion: "Pechuga de pollo empanizada, queso, cebolla, tomate, lechuga y aderezo de la casa.",
-    precio: "$50",
-    imagen: "img/chicken.jpg"
-  },
-  {
-    nombre: "Clásica",
-    descripcion: "Carne 100 gr. preparada con jamón, queso, tocino, acompañada con papas a la francesa.",
-    precio: "$50",
-    imagen: "img/clasica.jpg"
-  },
-  {
-    nombre: "Hawaiana",
-    descripcion: "Deliciosa hamburguesa preparada con jamón, queso, tocino, salchicha y piña natural.",
-    precio: "$50",
-    imagen: "img/hawaiana.jpg",
-    destacado: true
-  },
-{
-    nombre: "Mexicana",
-    descripcion: "Deliciosa hamburguesa con 100g de carne preparada con jamón, queso, tocino, cebolla frita, aguacate, totopos en julianas. Acompañada con papas a la francesa.",
-    precio: "$50",
-    imagen: "img/mexicana.jpg",
-    destacado: true
-  }
-
-
-
-];
-
-// Promociones por día (agregar esto en tu script.js)
-const promociones = [
-  
-  {
-    dia: "Martes",
-    titulo: "Boneles",
-    descripcion: "  10 piezas Mango habanero, Mango, Búfalo, Hot y BBQ. Un sabor a elegir.",
-    precio: "$99",
-    destacado: true,
-    imagenes: ["img/MartesBoneles10p.png"]
-  },
-  {
-    dia: "Miércoles",
-    titulo: "Combo Hamburguesa, Boneles y papas",
-    descripcion: "Hamburguesa, (Mexicana, Hawaiana, Champiñones y Clasica) + 3 Boneles a 1 sabor a elegir, (Mango Habanero, Mango Búfalo, BBQ y Hot).",
-    precio: "$80",
-    destacado: false,
-    imagenes: ["img/MiercolesHamburgesas.png"]
-  },
-  {
-    dia: "Jueves",
-    titulo: "Alitas",
-    descripcion: "10 piezas.",
-    precio: "$99",
-    destacado: false,
-    imagenes: ["img/10Alitasx99.png"]
-  },
-  {
-    dia: "Viernes",
-    titulo: "Happy Hour",
-    descripcion: "10 Alitas con papas o 10 Boneles con papas.",
-    precio: "120",
-    destacado: true,
-    imagenes: ["img/AlitasyBoneles.jpg"]
-  },
-  {
-    dia: "Viernes",
-    titulo: "two happy hour",
-    descripcion: "2 Chicken.",
-    precio: "100",
-    destacado: true,
-    imagenes: ["img/2chickenx100.png"]   
-  }
-  
-  
-];
-
+// === CARGA DINÁMICA DE HAMBURGUESAS===
+// Promociones por día Desde el json 
 function cargarPromociones() {
   const promoContainer = document.querySelector('.promo-grid');
-  
-  // Obtener el día actual (0=Domingo, 1=Lunes, etc.)
-  const hoy = new Date().getDay();
-  
-  // Mapear números de día a nombres en español
-  const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-  const diaActualNombre = diasSemana[hoy];
-  
-  // Ordenar promociones para que empiece por el día actual
-  const promocionesOrdenadas = [...promociones].sort((a, b) => {
-    // Encontrar índices de los días en el array diasSemana
-    const indexA = diasSemana.indexOf(a.dia);
-    const indexB = diasSemana.indexOf(b.dia);
-    
-    // Calcular diferencia relativa al día actual
-    const diffA = (indexA - hoy + 7) % 7;
-    const diffB = (indexB - hoy + 7) % 7;
-    
-    return diffA - diffB;
-  });
-  
-  // Generar las tarjetas de promoción
-  promocionesOrdenadas.forEach(promo => {
-    const promoCard = document.createElement('div');
-    promoCard.className = 'promo-card';
-    
-    // Resaltar si es el día actual
-    const esHoy = promo.dia === diaActualNombre;
-    
-    // Construir el carrusel de imágenes si existen
-    let carruselHTML = '';
-    if (promo.imagenes && promo.imagenes.length > 0) {
-      carruselHTML = `
-        <div class="promo-carousel">
-          ${promo.imagenes.map((img, i) => `
-            <img src="${img}" alt="${promo.titulo}" loading="lazy" class="${i === 0 ? 'active' : ''}">
-          `).join('')}
+
+  // Mostrar mensaje de carga
+  promoContainer.innerHTML = '<div class="loading">Cargando promociones...</div>';
+
+  // Estilo para el mensaje de carga
+  const loadingStyle = document.createElement('style');
+  loadingStyle.textContent = `
+    .loading {
+      color: #FFC107;
+      text-align: center;
+      padding: 20px;
+      font-size: 1.2rem;
+    }
+  `;
+  document.head.appendChild(loadingStyle);
+
+  fetch('data/promociones.json')
+    .then(response => {
+      if (!response.ok) throw new Error(`Error al cargar: ${response.status}`);
+      return response.json();
+    })
+    .then(promociones => {
+      // Limpiar mensaje de carga
+      promoContainer.innerHTML = '';
+      loadingStyle.remove();
+
+      const hoy = new Date().getDay();
+      const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+      const diaActualNombre = diasSemana[hoy];
+
+      // Ordenar promociones
+      const promocionesOrdenadas = [...promociones].sort((a, b) => {
+        const indexA = diasSemana.indexOf(a.dia);
+        const indexB = diasSemana.indexOf(b.dia);
+        const diffA = (indexA - hoy + 7) % 7;
+        const diffB = (indexB - hoy + 7) % 7;
+        return diffA - diffB;
+      });
+
+      promocionesOrdenadas.forEach(promo => {
+        const promoCard = document.createElement('div');
+        promoCard.className = 'promo-card';
+        const esHoy = promo.dia === diaActualNombre;
+
+        let carruselHTML = '';
+        if (promo.imagenes && promo.imagenes.length > 0) {
+          carruselHTML = `
+            <div class="promo-carousel">
+              ${promo.imagenes.map((img, i) => `
+                <img src="${img}" alt="${promo.titulo}" loading="lazy" class="${i === 0 ? 'active' : ''}">
+              `).join('')}
+            </div>
+          `;
+        }
+
+        promoCard.innerHTML = `
+          ${promo.destacado ? '<span class="promo-badge destacado-badge">¡Destacado!</span>' : ''}
+          ${esHoy ? '<span class="promo-badge hoy-badge">¡HOY!</span>' : ''}
+          ${carruselHTML}
+          <div class="promo-content">
+            <div class="promo-header">
+              <span class="promo-day">${promo.dia}</span>
+            </div>
+            <h3 class="promo-title">${promo.titulo}</h3>
+            <p class="promo-desc">${promo.descripcion}</p>
+            ${promo.precio ? `<div class="promo-price">${promo.precio}</div>` : ''}
+          </div>
+        `;
+
+        if (esHoy) {
+          promoCard.style.border = '2px solid var(--accent)';
+          promoCard.style.boxShadow = '0 0 15px rgba(255, 215, 0, 0.5)';
+        }
+
+        promoContainer.appendChild(promoCard);
+      });
+
+      inicializarCarruseles();
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      promoContainer.innerHTML = `
+        <div class="error">
+          <p>No se pudieron cargar las promociones</p>
+          <small>${error.message}</small>
         </div>
       `;
-    }
-    
-    promoCard.innerHTML = `
-      ${promo.destacado ? '<span class="promo-badge destacado-badge">¡Destacado!</span>' : ''}
-      ${esHoy ? '<span class="promo-badge hoy-badge">¡HOY!</span>' : ''}
-      
-      ${carruselHTML}
-      
-      <div class="promo-content">
-        <div class="promo-header">
-          <span class="promo-day">${promo.dia}</span>
-        </div>
-        <h3 class="promo-title">${promo.titulo}</h3>
-        <p class="promo-desc">${promo.descripcion}</p>
-        ${promo.precio ? `<div class="promo-price">${promo.precio}</div>` : ''}
-      </div>
-    `;
-    
-    // Estilos adicionales para el día actual
-    if (esHoy) {
-      promoCard.style.border = '2px solid var(--accent)';
-      promoCard.style.boxShadow = '0 0 15px rgba(255, 215, 0, 0.5)';
-    }
-    
-    promoContainer.appendChild(promoCard);
-  });
-  
-  // Inicializar carruseles después de crear las tarjetas
-  inicializarCarruseles();
+      const errorStyle = document.createElement('style');
+      errorStyle.textContent = `
+        .error {
+          color: #FF6B6B;
+          text-align: center;
+          padding: 20px;
+          border: 1px solid #FF6B6B;
+          border-radius: 8px;
+        }
+        .error small {
+          color: #CCC;
+          font-size: 0.8rem;
+        }
+      `;
+      document.head.appendChild(errorStyle);
+    });
 }
 
 function inicializarCarruseles() {
@@ -168,24 +112,17 @@ function inicializarCarruseles() {
     const imagenes = carrusel.querySelectorAll('img');
     let currentIndex = 0;
     let intervalo;
-    
+
     if (imagenes.length > 1) {
-      // Función para cambiar de imagen
       const cambiarImagen = () => {
         imagenes[currentIndex].classList.remove('active');
         currentIndex = (currentIndex + 1) % imagenes.length;
         imagenes[currentIndex].classList.add('active');
       };
-      
-      // Iniciar el intervalo (cambia cada 3 segundos)
+
       intervalo = setInterval(cambiarImagen, 3000);
-      
-      // Pausar al pasar el mouse
-      carrusel.addEventListener('mouseenter', () => {
-        clearInterval(intervalo);
-      });
-      
-      // Reanudar al quitar el mouse
+
+      carrusel.addEventListener('mouseenter', () => clearInterval(intervalo));
       carrusel.addEventListener('mouseleave', () => {
         intervalo = setInterval(cambiarImagen, 3000);
       });
@@ -193,38 +130,63 @@ function inicializarCarruseles() {
   });
 }
 
-// Llamar a la función cuando el DOM esté cargado
-document.addEventListener('DOMContentLoaded', cargarPromociones);
+// Asegúrate de llamarla cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+  cargarPromociones();
+});
 
-// Carga las hamburguesas en el menú
-function cargarHamburguesas() {
+
+// Carga las hamburguesas en el menú desde el json
+function cargarHamburguesasDesdeJSON() {
   const contenedor = document.querySelector('#hamburguesas .menu-items');
-  
-  // Limpiar contenedor si ya tiene contenido
+  contenedor.classList.add('menu-container');
   contenedor.innerHTML = '';
-  
-  hamburguesas.forEach((hamburguesa, index) => {
-    const item = document.createElement('div');
-    item.classList.add('item');
-    item.style.setProperty('--order', index);
-    
-    // Añade clase 'destacado' si corresponde
-    if(hamburguesa.destacado) {
-      item.classList.add('destacado');
-      item.innerHTML = `<div class="ribbon">¡MÁS VENDIDA!</div>`;
-    }
-    
-    item.innerHTML += `
-      <h3>${hamburguesa.nombre} <span class="price">${hamburguesa.precio}</span></h3>
-      <div class="img-container">
-        <img src="${hamburguesa.imagen}" alt="${hamburguesa.nombre}" loading="lazy">
-      </div>
-      <p>${hamburguesa.descripcion}</p>
-    `;
-    
-    contenedor.appendChild(item);
-  });
+
+  fetch('data/hamburguesas.json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('No se pudo cargar el archivo JSON de hamburguesas.');
+      }
+      return response.json();
+    })
+    .then(hamburguesas => {
+      hamburguesas.forEach(hamburguesa => {
+        const card = document.createElement('article');
+        card.classList.add('card');
+
+        const badgeHTML = hamburguesa.destacado && hamburguesa.badge
+          ? `<span class="card-badge">${hamburguesa.badge}</span>`
+          : '';
+
+        const subtitleHTML = hamburguesa.badge
+          ? `<p class="card-subtitle">${hamburguesa.badge}</p>`
+          : '';
+
+        card.innerHTML = `
+          ${badgeHTML}
+          <img src="${hamburguesa.imagen}" alt="${hamburguesa.nombre}" class="card-img" loading="lazy">
+          <div class="card-body">
+            <h2 class="card-title">
+              ${hamburguesa.nombre}
+              <span class="card-price">${hamburguesa.precio}</span>
+            </h2>
+            ${subtitleHTML}
+            <p class="card-description">${hamburguesa.descripcion}</p>
+          </div>
+        `;
+
+        contenedor.appendChild(card);
+      });
+    })
+    .catch(error => {
+      console.error('Error al cargar hamburguesas:', error);
+      contenedor.innerHTML = '<p style="color: red;">Error al cargar el menú de hamburguesas.</p>';
+    });
 }
+
+
+
+
 
 // === BOTÓN DE "IR ARRIBA" ===
 function crearBotonSubir() {
@@ -316,12 +278,168 @@ function mejorarBotones() {
   });
 }
 
+
+ // Registrar ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Variables
+        let lastScrollY = 0;
+        let isExpanded = false;
+        const contactFloat = document.querySelector('.contact-float');
+        const contactFloatText = document.querySelector('.contact-float-text');
+        
+        // Timeline para las animaciones
+        const expandTl = gsap.timeline({ paused: true });
+        const contractTl = gsap.timeline({ paused: true });
+        
+        // Configurar animaciones
+        expandTl
+            .to(contactFloat, {
+                width: "280px",
+                paddingRight: "20px",
+                duration: 0.4,
+                ease: "power2.out"
+            })
+            .to(".contact-float-icon", {
+                marginLeft: "20px",
+                duration: 0.4,
+                ease: "power2.out"
+            }, 0)
+            .to(contactFloatText, {
+                opacity: 1,
+                x: 0,
+                duration: 0.3,
+                ease: "power2.out"
+            }, "-=0.2");
+            
+        contractTl
+            .to(contactFloatText, {
+                opacity: 0,
+                x: 10,
+                duration: 0.2,
+                ease: "power2.in"
+            })
+            .to(contactFloat, {
+                width: "60px",
+                paddingRight: "0px",
+                duration: 0.3,
+                ease: "power2.in"
+            }, "-=0.1")
+            .to(".contact-float-icon", {
+                marginLeft: "15px",
+                duration: 0.3,
+                ease: "power2.in"
+            }, "-=0.3");
+        
+        // Función para expandir el botón
+        function expandButton() {
+            if (!isExpanded) {
+                contractTl.pause();
+                expandTl.restart();
+                isExpanded = true;
+            }
+        }
+        
+        // Función para contraer el botón
+        function contractButton() {
+            if (isExpanded) {
+                expandTl.pause();
+                contractTl.restart();
+                isExpanded = false;
+            }
+        }
+        
+        // Detectar dirección del scroll
+        function handleScroll() {
+            const currentScrollY = window.scrollY;
+            
+            // Si estamos en el top, contraer siempre
+            if (currentScrollY < 100) {
+                contractButton();
+            } else {
+                // Detectar dirección del scroll
+                if (currentScrollY > lastScrollY) {
+                    // Scrolling hacia abajo - expandir
+                    expandButton();
+                } else {
+                    // Scrolling hacia arriba - contraer
+                    contractButton();
+                }
+            }
+            
+            lastScrollY = currentScrollY;
+        }
+        
+        // Event listeners
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        
+        // Click handler para el botón
+        contactFloat.addEventListener('click', function() {
+            const phoneNumber = "529811939135"; // Reemplaza con tu número
+            const message = "¡Hola! Me interesa hacer un pedido en Jada Burguer";
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+        
+        // Animación inicial del botón (fade in)
+        gsap.fromTo(contactFloat, 
+            { 
+                scale: 0,
+                opacity: 0 
+            },
+            { 
+                scale: 1,
+                opacity: 1,
+                duration: 0.5,
+                ease: "back.out(1.7)",
+                delay: 1
+            }
+        );
+        
+        // Animación de hover mejorada
+        contactFloat.addEventListener('mouseenter', function() {
+            gsap.to(this, {
+                scale: 1.05,
+                duration: 0.2,
+                ease: "power2.out"
+            });
+        });
+        
+        contactFloat.addEventListener('mouseleave', function() {
+            gsap.to(this, {
+                scale: 1,
+                duration: 0.2,
+                ease: "power2.out"
+            });
+        });
+        
+        // Inicializar estado
+        contractButton();
+        
+        // Configurar dark mode
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+
+
+
+
 // === INICIALIZACIÓN ===
 document.addEventListener('DOMContentLoaded', () => {
-  cargarHamburguesas();
+  cargarHamburguesasDesdeJSON(); // ← esta es la nueva
   crearBotonSubir();
   configurarAnimacionesScroll();
   mejorarBotones();
+  cargarPromociones(); // Cargar promociones al inicio
+ 
   
   // Precarga de imágenes importantes
   const preloadImages = ['logo.png', 'especial.jpg', 'hawaiana.jpg'];
