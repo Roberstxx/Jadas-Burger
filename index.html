@@ -5,65 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Las mejores hamburguesas y alitas en tu ciudad. Servicio a domicilio disponible.">
   <title>Jada Burguer - Hamburguesas & Alitas</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="img/logo.png" type="image/png">
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-  <style>
-  .contact-float {
-    position: fixed;
-    top: 20px;   /* ¡Cambia de 'bottom' a 'top'! */
-    right: 20px;
-    z-index: 1000;
-    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-    border-radius: 30px;
-    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 60px;
-    height: 60px;
-    padding: 0;
-}
-        
-        .contact-float:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(37, 211, 102, 0.4);
-        }
-        
-        .contact-float-icon {
-             width: 30px;
-            height: 30px;
-            fill: white;
-            flex-shrink: 0;
-            margin-left: 15px;
-            transition: margin-left 0.4s ease;
-        }
-        
-        .contact-float-text {
-            color: white;
-            font-weight: 600;
-            font-size: 16px;
-            white-space: nowrap;
-            margin-left: 12px;
-            opacity: 0;
-            transform: translateX(10px);
-            font-family: 'Poppins', sans-serif;
-        }
-        .contact-float {
-    /* ... tus estilos existentes ... */
-    text-decoration: none; /* Añade esta línea para quitar el subrayado */
-}
-         
-    </style>
 </head>
 <body>
   <header>
@@ -195,161 +143,11 @@
     </div>
   </footer>
 
-  <script src="script.js"></script> 
+  <script src="js/script.js"></script> 
   
   <script>
     document.getElementById('current-year').textContent = new Date().getFullYear();
   </script>
 
-  <script>
-        // Registrar ScrollTrigger
-        gsap.registerPlugin(ScrollTrigger);
-        
-        // Variables
-        let lastScrollY = 0;
-        let isExpanded = false;
-        const contactFloat = document.querySelector('.contact-float');
-        const contactFloatText = document.querySelector('.contact-float-text');
-        
-        // Timeline para las animaciones
-        const expandTl = gsap.timeline({ paused: true });
-        const contractTl = gsap.timeline({ paused: true });
-        
-        // Configurar animaciones
-        expandTl
-            .to(contactFloat, {
-                width: "280px",
-                paddingRight: "20px",
-                duration: 0.4,
-                ease: "power2.out"
-            })
-            .to(".contact-float-icon", {
-                marginLeft: "20px",
-                duration: 0.4,
-                ease: "power2.out"
-            }, 0)
-            .to(contactFloatText, {
-                opacity: 1,
-                x: 0,
-                duration: 0.3,
-                ease: "power2.out"
-            }, "-=0.2");
-            
-        contractTl
-            .to(contactFloatText, {
-                opacity: 0,
-                x: 10,
-                duration: 0.2,
-                ease: "power2.in"
-            })
-            .to(contactFloat, {
-                width: "60px",
-                paddingRight: "0px",
-                duration: 0.3,
-                ease: "power2.in"
-            }, "-=0.1")
-            .to(".contact-float-icon", {
-                marginLeft: "15px",
-                duration: 0.3,
-                ease: "power2.in"
-            }, "-=0.3");
-        
-        // Función para expandir el botón
-        function expandButton() {
-            if (!isExpanded) {
-                contractTl.pause();
-                expandTl.restart();
-                isExpanded = true;
-            }
-        }
-        
-        // Función para contraer el botón
-        function contractButton() {
-            if (isExpanded) {
-                expandTl.pause();
-                contractTl.restart();
-                isExpanded = false;
-            }
-        }
-        
-        // Detectar dirección del scroll
-        function handleScroll() {
-            const currentScrollY = window.scrollY;
-            
-            // Si estamos en el top, contraer siempre
-            if (currentScrollY < 100) {
-                contractButton();
-            } else {
-                // Detectar dirección del scroll
-                if (currentScrollY > lastScrollY) {
-                    // Scrolling hacia abajo - expandir
-                    expandButton();
-                } else {
-                    // Scrolling hacia arriba - contraer
-                    contractButton();
-                }
-            }
-            
-            lastScrollY = currentScrollY;
-        }
-        
-        // Event listeners
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        
-        // Click handler para el botón
-        contactFloat.addEventListener('click', function() {
-            const phoneNumber = "529811939135"; // Reemplaza con tu número
-            const message = "¡Hola! Me interesa hacer un pedido en Jada Burguer";
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
-        });
-        
-        // Animación inicial del botón (fade in)
-        gsap.fromTo(contactFloat, 
-            { 
-                scale: 0,
-                opacity: 0 
-            },
-            { 
-                scale: 1,
-                opacity: 1,
-                duration: 0.5,
-                ease: "back.out(1.7)",
-                delay: 1
-            }
-        );
-        
-        // Animación de hover mejorada
-        contactFloat.addEventListener('mouseenter', function() {
-            gsap.to(this, {
-                scale: 1.05,
-                duration: 0.2,
-                ease: "power2.out"
-            });
-        });
-        
-        contactFloat.addEventListener('mouseleave', function() {
-            gsap.to(this, {
-                scale: 1,
-                duration: 0.2,
-                ease: "power2.out"
-            });
-        });
-        
-        // Inicializar estado
-        contractButton();
-        
-        // Configurar dark mode
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.documentElement.classList.add('dark');
-        }
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-            if (event.matches) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-        });
-    </script>
 </body>
 </html>
