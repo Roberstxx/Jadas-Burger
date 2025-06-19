@@ -1,0 +1,42 @@
+[
+  {
+    "dia": "Martes",
+    "titulo": "Boneles",
+    "descripcion": "10 piezas Mango habanero, Mango, Búfalo, Hot y BBQ. Un sabor a elegir.",
+    "precio": "$99",
+    "destacado": true,
+    "imagenes": ["img/MartesBoneles10p.png"]
+  },
+  {
+    "dia": "Miércoles",
+    "titulo": "Combo Hamburguesa, Boneles y papas",
+    "descripcion": "Hamburguesa, (Mexicana, Hawaiana, Champiñones y Clasica) + 3 Boneles a 1 sabor a elegir, (Mango Habanero, Mango Búfalo, BBQ y Hot).",
+    "precio": "$80",
+    "destacado": false,
+    "imagenes": ["img/MiercolesHamburgesas.png"]
+  },
+  {
+    "dia": "Jueves",
+    "titulo": "Alitas",
+    "descripcion": "10 piezas.",
+    "precio": "$99",
+    "destacado": false,
+    "imagenes": ["img/10Alitasx99.png"]
+  },
+  {
+    "dia": "Viernes",
+    "titulo": "Happy Hour",
+    "descripcion": "10 Alitas con papas o 10 Boneles con papas.",
+    "precio": "120",
+    "destacado": true,
+    "imagenes": ["img/AlitasyBoneles.jpg"]
+  },
+  {
+    "dia": "Viernes",
+    "titulo": "two happy hour",
+    "descripcion": "2 Chicken.",
+    "precio": "100",
+    "destacado": true,
+    "imagenes": ["img/2chickenx100.png"]
+  }
+]
