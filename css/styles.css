@@ -560,24 +560,12 @@ footer {
   box-shadow: 0 10px 25px rgba(255, 140, 0, 0.3);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Estylos del menu de hamburguesas*/
 .card {
   background-color: #1f1f1f;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 15px rgba(255, 140, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
@@ -707,8 +695,8 @@ footer {
             font-family: 'Poppins', sans-serif;
         }
         .contact-float {
-    /* ... tus estilos existentes ... */
-    text-decoration: none; /* Añade esta línea para quitar el subrayado */
+    
+    text-decoration: none; /* línea para quitar el subrayado */
 }
 
 
