@@ -1,0 +1,46 @@
+[
+  {
+    "nombre": "Jada Especial",
+    "descripcion": "Nuestra hamburguesa estrella con 100gr de carne, jugoso jamón, queso derretido, tocino crujiente, cebolla caramelizada y aguacate fresco. ¡Una explosión de sabor en cada bocado!",
+    "precio": "$65",
+    "imagen": "img/especial.jpg",
+    "destacado": true,
+    "badge": "Más vendida"
+  },
+  {
+    "nombre": "Champiñones",
+    "descripcion": "Exquisita carne de 100gr, jamón, queso fundido, tocino crujiente y generosos champiñones salteados. ¡Un deleite para los amantes de los hongos!",
+    "precio": "$55",
+    "imagen": "img/champinones.jpg",
+    "badge": "Vegetariana"
+  },
+  {
+    "nombre": "Chicken Burger",
+    "descripcion": "Pechuga de pollo empanizada y dorada, queso, cebolla, tomate, lechuga y nuestro aderezo especial de la casa. ¡Una opción ligera y llena de sabor!",
+    "precio": "$50",
+    "imagen": "img/chicken.jpg",
+    "badge": "Nueva"
+  },
+  {
+    "nombre": "Clásica",
+    "descripcion": "Carne de 100gr, jamón, queso y tocino. ¡El sabor auténtico que nunca falla! Acompañada de crujientes papas a la francesa.",
+    "precio": "$50",
+    "imagen": "img/clasica.jpg"
+  },
+  {
+    "nombre": "Hawaiana",
+    "descripcion": "Deliciosa hamburguesa con jamón, queso, tocino, salchicha y piña natural. ¡Una combinación agridulce irresistible!",
+    "precio": "$50",
+    "imagen": "img/hawaiana.jpg",
+    "destacado": true,
+    "badge": "Popular"
+  },
+  {
+    "nombre": "Mexicana",
+    "descripcion": "Hamburguesa con 100g de carne, jamón, queso, tocino, cebolla frita, aguacate y totopos en julianas. Con un toque de jalapeño (tapatio) para el paladar aventurero. ¡Acompañada de papas!",
+    "precio": "$50",
+    "imagen": "img/mexicana.jpg",
+    "destacado": true,
+    "badge": "Especial"
+  }
+]
